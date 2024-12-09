@@ -160,6 +160,7 @@ export default {
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
+  color: var(--secondary);
 }
 
 :deep(.menu__link svg *) {
