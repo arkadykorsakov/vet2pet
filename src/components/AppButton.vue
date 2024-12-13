@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 .btn {
-  padding: 18px;
+  padding: 16px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
   border-radius: 100px;

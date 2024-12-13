@@ -43,7 +43,6 @@ export default {
 
 .title.primary {
   color: var(--primary);
-
 }
 
 .title.secondary {

@@ -9,6 +9,13 @@ const routes = [
     }
   },
   {
+    path: '/orders',
+    component: () => import('../views/OrdersView.vue'),
+    meta: {
+      layout: 'dashboard'
+    }
+  },
+  {
     path: '/register',
     component: () => import('../views/RegisterView.vue'),
     meta: {

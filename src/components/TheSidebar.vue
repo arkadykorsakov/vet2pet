@@ -12,7 +12,7 @@ import ChartIcon from '@/icons/ChartIcon.vue'
 import WrenchIcon from '@/icons/WrenchIcon.vue'
 
 export default {
-  name: 'AppSidebar',
+  name: 'TheSidebar',
   components: {
     HomeIcon,
     ExitIcon,
@@ -29,14 +29,14 @@ export default {
       logo,
       avatar,
       menu: [
-        { label: 'Главная', link: '/', icon: HomeIcon },
-        { label: 'Заявки', link: '/login', icon: ListIcon },
-        { label: 'Ветеринарные услуги', link: '/login', icon: PaperIcon },
-        { label: 'Питомцы', link: '/login', icon: AnimalIcon },
-        { label: 'Пользователи', link: '/login', icon: UserIcon },
-        { label: 'Отзывы', link: '/login', icon: HeartIcon },
-        { label: 'Статистика', link: '/login', icon: ChartIcon },
-        { label: 'Настройки', link: '/login', icon: WrenchIcon }
+        { label: 'Главная', link: '/', icon: 'HomeIcon' },
+        { label: 'Заявки', link: '/orders', icon: 'ListIcon' },
+        { label: 'Ветеринарные услуги', link: '/login', icon: 'PaperIcon' },
+        { label: 'Питомцы', link: '/login', icon: 'AnimalIcon' },
+        { label: 'Пользователи', link: '/login', icon: 'UserIcon' },
+        { label: 'Отзывы', link: '/login', icon: 'HeartIcon' },
+        { label: 'Статистика', link: '/login', icon: 'ChartIcon' },
+        { label: 'Настройки', link: '/login', icon: 'WrenchIcon' }
       ]
     }
   },
@@ -157,9 +157,9 @@ export default {
   line-height: 1;
   gap: 8px;
   transition: all 0.3s ease;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
+  -webkit-border-radius: var(--secondary-rounded);
+  -moz-border-radius: var(--secondary-rounded);
+  border-radius: var(--secondary-rounded);
   color: var(--secondary);
 }
 

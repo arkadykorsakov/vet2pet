@@ -1,13 +1,15 @@
 <script>
+import AppTitle from '@/components/AppTitle.vue'
 export default {
-  name: "HomeView"
+  name: 'HomeView',
+  components: {
+    AppTitle
+  }
 }
 </script>
 
 <template>
-  HomeView
+  <div class="home-view">
+    <AppTitle>Главная</AppTitle>
+  </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -5,7 +5,9 @@
   --surface-bright: #f4fbfa;
   --on-surface: #161d1d;
   --on-primary: #ffffff;
+  --on-primary-2: #001a1a;
   --surface-tint: #00696b;
+  --surface-variant: #dae5e4;
   --primary-fixed: #238182;
   --primary-fixed-rgb: 35, 129, 130;
   --primary-fixed-hover: #1f6566;
@@ -18,7 +20,11 @@
   --inverse-primary: #80d4d5;
   --secondary: #2e4747;
   --tertiary-container: #627693;
+  --tertiary: #30445f;
   --base-rounded: 8px;
+  --secondary-rounded: 30px;
+  --outline: #576161;
+  --background: #f4fbfa;
 }
 
 * {
@@ -124,4 +130,8 @@ h6 {
   border: 0;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
+}
+
+#app {
+  height: 100%;
 }

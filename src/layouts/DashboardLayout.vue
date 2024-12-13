@@ -1,18 +1,31 @@
-<template>
-  <div>
-    <AppSidebar/>
-    <h1>Dashboard</h1>
-    <slot/>
-  </div>
-</template>
-
 <script>
-import AppSidebar from "@/components/AppSidebar.vue";
+import TheSidebar from '@/components/TheSidebar.vue'
 
 export default {
-  name: "DashboardLayout",
+  name: 'DashboardLayout',
   components: {
-    AppSidebar
+    TheSidebar
   }
 }
 </script>
+
+<template>
+  <div class="dashboard-layout">
+    <TheSidebar />
+    <main class="main">
+      <slot />
+    </main>
+  </div>
+</template>
+
+<style scoped>
+.dashboard-layout {
+  height: 100%;
+}
+.main {
+  padding: 44px 32px;
+  margin-left: 280px;
+  min-height: 100dvh;
+  overflow-y: auto;
+}
+</style>
