@@ -152,7 +152,7 @@ export default {
             <template v-else-if="col.format === 'number'">
               {{ formatNumber(row[`${col.field}`]) }}
             </template>
-            <template v-else-if="col.format === 'time'">
+            <template v-else-if="col.format === 'date'">
               {{ formatTime(new Date(row[`${col.field}`])) }}
             </template>
             <template v-else>
@@ -174,7 +174,7 @@ export default {
         </tbody>
       </table>
     </div>
-    <div class="pagination-wrapper" v-if="paginatedRows.length > 1">
+    <div class="pagination-wrapper">
       <AppPagination
           :count-pages="paginatedRows.length"
           :current-page="currentPage"

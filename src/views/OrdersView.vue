@@ -41,7 +41,7 @@ export default {
           label: 'Дата заявки',
           field: 'created',
           sortable: true,
-          format: 'time'
+          format: 'date'
         }
       ],
       fakeData: [
@@ -227,7 +227,6 @@ export default {
 <template>
   <div class="orders-view">
     <DashboardHeader
-        class="dashboard-header"
         title="Заказы"
         searchable
         addable
@@ -245,9 +244,3 @@ export default {
     </AppTable>
   </div>
 </template>
-
-<style scoped>
-.dashboard-header {
-  margin-bottom: 36px;
-}
-</style>

@@ -73,6 +73,9 @@ export default {
   gap: 24px;
 }
 
+.header:not(:last-child) {
+  margin-bottom: 46px;
+}
 
 .header__addable {
   margin-left: auto;

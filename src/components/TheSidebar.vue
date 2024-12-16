@@ -31,12 +31,12 @@ export default {
       menu: [
         { label: 'Главная', link: '/', icon: 'HomeIcon' },
         { label: 'Заявки', link: '/orders', icon: 'ListIcon' },
-        { label: 'Ветеринарные услуги', link: '/login', icon: 'PaperIcon' },
-        { label: 'Питомцы', link: '/login', icon: 'AnimalIcon' },
-        { label: 'Пользователи', link: '/login', icon: 'UserIcon' },
-        { label: 'Отзывы', link: '/login', icon: 'HeartIcon' },
-        { label: 'Статистика', link: '/login', icon: 'ChartIcon' },
-        { label: 'Настройки', link: '/login', icon: 'WrenchIcon' }
+        { label: 'Ветеринарные услуги', link: '/vet-services', icon: 'PaperIcon' },
+        { label: 'Питомцы', link: '/pets', icon: 'AnimalIcon' },
+        { label: 'Пользователи', link: '/users', icon: 'UserIcon' },
+        { label: 'Отзывы', link: '/reviews', icon: 'HeartIcon' },
+        { label: 'Статистика', link: '/statistics', icon: 'ChartIcon' },
+        { label: 'Настройки', link: '/settings', icon: 'WrenchIcon' }
       ]
     }
   },
