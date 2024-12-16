@@ -1,12 +1,12 @@
 <script>
-import { useId } from 'vue'
-import { useField } from 'vee-validate'
+import {useId} from 'vue'
+import {useField} from 'vee-validate'
 import ErrorIcon from "@/icons/ErrorIcon.vue";
 import AppFormError from "@/components/AppFormError.vue";
 
 export default {
   name: 'AppDatePicker',
-  components: { ErrorIcon, AppFormError },
+  components: {ErrorIcon, AppFormError},
   data() {
     return {
       id: useId(),
@@ -41,20 +41,29 @@ export default {
     maxDate: {
       type: String,
       default: '9999-12-31'
+    },
+    modelValue: {
+      type: String,
+      default: undefined
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
     const {
-      value: modelValue,
+      value: inputValue,
       errorMessage,
       handleBlur,
       handleChange,
       meta
     } = useField(props.name, undefined, {
-      initialValue: props.value
+      initialValue: props.value,
+      syncVModel: true
     })
     return {
-      modelValue,
+      inputValue,
       errorMessage,
       handleBlur,
       handleChange,
@@ -65,30 +74,32 @@ export default {
 </script>
 
 <template>
-  <div class="form__group">
+  <div class="default-form-group">
     <div class="form__field">
       <input
-        class="default-input form__input"
-        ref="datePickerEl"
-        :value="modelValue"
-        @input="handleChange"
-        @blur="handleBlur"
-        :type="isShowTime ? 'datetime-local' : 'date'"
-        :max="isShowTime ? `${maxDate}T23:59` : `${maxDate}`"
-        :min="isShowTime ? `${minDate}T00:00` : `${minDate}`"
-        :class="{ error: !!errorMessage, filled: !!modelValue }"
-        :id="id"
-        :name="name"
+          class="default-input form__input"
+          ref="datePickerEl"
+          :value="value"
+          @input="handleChange"
+          @blur="handleBlur"
+          :type="isShowTime ? 'datetime-local' : 'date'"
+          :max="isShowTime ? `${maxDate}T23:59` : `${maxDate}`"
+          :min="isShowTime ? `${minDate}T00:00` : `${minDate}`"
+          :class="{ error: !!errorMessage, filled: !!inputValue }"
+          :id="id"
+          :name="name"
+          v-model="inputValue"
+          :disabled="disabled"
       />
       <label
-        class="form__label default-label"
-        :for="id"
-        @click="() => this.$refs.datePickerEl.focus()"
-        >{{ label }}</label
+          class="form__label default-label"
+          :for="id"
+          @click="() => this.$refs.datePickerEl.focus()"
+      >{{ label }}</label
       >
-      <ErrorIcon v-if="errorMessage" class="default-error-icon" />
+      <ErrorIcon v-if="errorMessage" class="default-error-icon"/>
     </div>
-    <AppFormError v-if="errorMessage" :error-message="errorMessage" />
+    <AppFormError v-if="errorMessage" :error-message="errorMessage"/>
   </div>
 </template>
 
@@ -108,6 +119,10 @@ export default {
   padding: 12px 16px;
   color: transparent;
   cursor: text;
+}
+
+.form__input:disabled {
+  color: transparent !important;
 }
 
 .form__input.error {

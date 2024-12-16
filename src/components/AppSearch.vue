@@ -62,6 +62,7 @@ export default {
       @change="handleChange"
       @blur="handleBlur"
       ref="searchEl"
+      v-model="inputValue"
     />
     <label class="visually-hidden" :for="id">Поиск</label>
   </div>

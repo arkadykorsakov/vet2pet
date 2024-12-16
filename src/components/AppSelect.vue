@@ -5,13 +5,13 @@ import {onClickOutside} from '@vueuse/core'
 import ErrorIcon from '@/icons/ErrorIcon.vue'
 import ArrowIcon from '@/icons/ArrowIcon.vue'
 import AppFormError from '@/components/AppFormError.vue'
-import TransitionFadeIn from "@/components/TransitionFadeIn.vue";
+import TransitionFadeIn from '@/components/TransitionFadeIn.vue'
 
 export default {
   name: 'AppSelect',
   components: {TransitionFadeIn, ArrowIcon, ErrorIcon, AppFormError},
   props: {
-    options: {
+    items: {
       type: Array,
       required: true
     },
@@ -24,8 +24,24 @@ export default {
       required: true
     },
     value: {
+      type: [String, Number],
+      default: undefined
+    },
+    itemValue: {
+      type: String,
+      required: true
+    },
+    itemTitle: {
+      type: String,
+      required: true
+    },
+    modelValue: {
       type: String,
       default: undefined
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -37,23 +53,27 @@ export default {
   },
   computed: {
     selectContent() {
-      return (
-          this.options.find((option) => option.val === this.modelValue)?.label ||
-          ''
-      )
+      if (this.items.length) {
+        const activeEl = this.items.find(
+            (option) => option[this.itemValue] === this.selectValue
+        )
+        return activeEl ? activeEl[this.itemTitle] : ''
+      }
+      return ''
     }
   },
   setup(props) {
     const {
-      value: modelValue,
+      value: selectValue,
       errorMessage,
       handleBlur,
       handleChange
     } = useField(props.name, undefined, {
-      initialValue: props.value
+      initialValue: props.value,
+      syncVModel: true
     })
     return {
-      modelValue,
+      selectValue,
       errorMessage,
       handleBlur,
       handleChange
@@ -68,13 +88,14 @@ export default {
 </script>
 
 <template>
-  <div class="form__group" ref="formGroupEl">
+  <div class="default-form-group" ref="formGroupEl">
     <div class="default-field">
       <button
           type="button"
           class="select__content default-input"
-          :class="{ filled: isOpen || !!modelValue, error: !!errorMessage }"
+          :class="{ filled: isOpen || !!selectValue, error: !!errorMessage }"
           @click="isOpen = !isOpen"
+          :disabled="disabled"
       >
         {{ selectContent }}
       </button>
@@ -84,17 +105,17 @@ export default {
       <ArrowIcon class="select__arrow" :class="{ reverse: isOpen }"/>
       <ErrorIcon v-if="errorMessage" class="default-error-icon"/>
       <TransitionFadeIn>
-        <div class="select-options" v-if="isOpen">
-          <ul v-if="options?.length" class="select-options__list">
+        <div class="select-items" v-if="isOpen">
+          <ul v-if="items?.length" class="select-items__list">
             <li
-                v-for="(option, idx) in options"
-                :key="option.val"
+                v-for="(option, idx) in items"
+                :key="option[itemValue]"
                 class="select-option"
             >
               <input
                   type="radio"
                   :name="name"
-                  :value="option.val"
+                  :value="option[itemValue]"
                   :id="id + idx"
                   @change="
                   (val) => {
@@ -104,6 +125,7 @@ export default {
                 "
                   class="select-option__radio"
                   tabindex="-1"
+                  v-model="selectValue"
               />
               <label
                   :for="id + idx"
@@ -113,7 +135,7 @@ export default {
                   ($event) => $event.target.previousSibling.click()
                 "
               >
-                {{ option.label }}
+                {{ option[itemTitle] }}
               </label>
             </li>
           </ul>
@@ -129,7 +151,7 @@ export default {
   cursor: pointer;
 }
 
-.select-options {
+.select-items {
   -webkit-border-radius: var(--base-rounded);
   -moz-border-radius: var(--base-rounded);
   border-radius: var(--base-rounded);
@@ -165,20 +187,20 @@ export default {
   position: relative;
 }
 
-.select-options__list {
+.select-items__list {
   max-height: 180px;
   overflow-y: auto;
 }
 
-.select-options__list::-webkit-scrollbar {
+.select-items__list::-webkit-scrollbar {
   width: 5px;
 }
 
-.select-options__list::-webkit-scrollbar-track {
+.select-items__list::-webkit-scrollbar-track {
   background: var(--surface-bright);
 }
 
-.select-options__list::-webkit-scrollbar-thumb {
+.select-items__list::-webkit-scrollbar-thumb {
   background-color: var(--tertiary-container);
   border-radius: 4px;
 }

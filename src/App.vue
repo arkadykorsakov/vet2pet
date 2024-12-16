@@ -1,5 +1,5 @@
 <script>
-import AppToast from './components/AppToast.vue'
+import TheToast from './components/TheToast.vue'
 import AuthLayout from './layouts/AuthLayout.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
@@ -12,14 +12,14 @@ export default {
   components: {
     AuthLayout,
     DashboardLayout,
-    AppToast
+    TheToast
   }
 }
 </script>
 
 <template>
   <component :is="`${layout}-layout`">
-    <RouterView />
+    <RouterView/>
   </component>
-  <AppToast message="Сообщение" />
+  <TheToast/>
 </template>

@@ -78,6 +78,7 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;
   padding: 20px;
+  overflow: auto;
 }
 
 .modal__header {

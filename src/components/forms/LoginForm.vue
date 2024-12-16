@@ -5,26 +5,27 @@ import AppPassword from "@/components/AppPassword.vue";
 import AppButton from "@/components/AppButton.vue";
 import * as yup from "yup";
 import {EMAIL_MSG, REQUIRED_MSG} from "@/consts.js";
+import {markRaw} from "vue";
 
 export default {
   name: 'LoginForm',
   components: {AppButton, AppPassword, AppInput, Form},
   data() {
+    const schema = markRaw(yup.object({
+      email: yup.string().required(REQUIRED_MSG).email(EMAIL_MSG),
+      password: yup
+          .string()
+          .required(REQUIRED_MSG)
+          .min(6, 'Минимум 6 символов'),
+    }))
     return {
-      schema:
-          yup.object({
-            email: yup.string().required(REQUIRED_MSG).email(EMAIL_MSG),
-            password: yup
-                .string()
-                .required(REQUIRED_MSG)
-                .min(6, 'Минимум 6 символов'),
-          })
+      schema
     }
   },
   methods: {
     submit(values) {
-        console.log(values)
-        this.$router.push('/')
+      console.log(values)
+      this.$router.push('/')
     },
   }
 }

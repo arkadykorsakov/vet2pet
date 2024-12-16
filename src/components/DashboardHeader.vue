@@ -23,6 +23,10 @@ export default {
     addButtonLabel: {
       type: String,
       default: "Добавить +"
+    },
+    titleModalAdd: {
+      type: String,
+      default: "Создать"
     }
   },
   emits: ['search'],
@@ -55,7 +59,7 @@ export default {
     <AppButton class="header__addable" v-if="addable" @click="openModal">{{ addButtonLabel }}
     </AppButton>
     <teleport to="body" v-if="addable">
-      <AppModal title="Создать объект" :show="show" @close="closeModal">
+      <AppModal :title="titleModalAdd" :show="show" @close="closeModal">
         <slot name="modal" :close="closeModal"/>
       </AppModal>
     </teleport>

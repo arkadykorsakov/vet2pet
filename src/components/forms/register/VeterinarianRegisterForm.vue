@@ -82,12 +82,12 @@ export default {
       ],
       workTypes: [
         {
-          label: 'Самозанятый',
-          val: 'Самозанятый'
+          name: 'Самозанятый',
+          id: 1
         },
         {
-          label: 'ИП',
-          val: 'ИП'
+          name: 'ИП',
+          id: 2
         }
       ]
     }
@@ -128,8 +128,10 @@ export default {
         <AppSelect
           label="Форма занятости"
           name="work_type"
-          :options="workTypes"
+          :items="workTypes"
           class="default-form-group"
+          item-title="name"
+          item-value="id"
         />
         <AppInput label="Фамилия" name="surname" class="default-form-group" />
         <AppInput label="Имя" name="name" class="default-form-group" />
