@@ -177,7 +177,7 @@ export default {
       </div>
     </div>
     <ModalFormButtons
-        :disabled-submit="isSubmitting || !meta.valid"
+        :disabled-submit="isSubmitting"
         @cancel="$emit('close')"
     />
   </Form>

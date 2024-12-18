@@ -3,10 +3,11 @@ import AppTitle from '@/components/AppTitle.vue'
 import XSecondIcon from '@/icons/XSecondIcon.vue'
 import TransitionFadeIn from '@/components/TransitionFadeIn.vue'
 import ModalFormButtons from '@/components/ModalFormButtons.vue'
+import useFocusTrap from '@/composables/useFocusTrap'
 
 export default {
   name: 'AppModal',
-  components: { ModalFormButtons, TransitionFadeIn, XSecondIcon, AppTitle },
+  components: {ModalFormButtons, TransitionFadeIn, XSecondIcon, AppTitle},
   props: {
     title: {
       type: String,
@@ -21,9 +22,9 @@ export default {
   watch: {
     show() {
       if (this.show) {
-        document.body.style.overflow = 'hidden'
+        this.lockBodyScroll();
       } else {
-        document.body.style.overflow = null
+        this.unlockBodyScroll()
       }
     }
   },
@@ -35,6 +36,18 @@ export default {
       if (e.key === 'Escape' && this.show) {
         this.close()
       }
+    },
+    getScrollbarWidth() {
+      return window.innerWidth - document.documentElement.clientWidth;
+    },
+    lockBodyScroll() {
+      const scrollbarWidth = this.getScrollbarWidth();
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.body.style.overflow = 'hidden';
+    },
+    unlockBodyScroll() {
+      document.body.style.paddingRight = '';
+      document.body.style.overflow = '';
     }
   },
   mounted() {
@@ -43,6 +56,12 @@ export default {
   unmounted() {
     document.removeEventListener('keydown', this.closeOnEscape)
     document.body.style.overflow = null
+  },
+  setup() {
+    const {trapRef} = useFocusTrap()
+    return {
+      trapRef
+    }
   }
 }
 </script>
@@ -50,15 +69,15 @@ export default {
 <template>
   <TransitionFadeIn>
     <div class="modal" v-if="show" @click.self="close">
-      <div class="modal__card">
+      <div class="modal__card" ref="trapRef">
         <button class="modal__close" type="button" @click="close">
-          <XSecondIcon />
+          <XSecondIcon/>
         </button>
         <div class="modal__header">
           <AppTitle tag="h2">{{ title }}</AppTitle>
         </div>
         <div class="modal__body">
-          <slot />
+          <slot/>
         </div>
       </div>
     </div>

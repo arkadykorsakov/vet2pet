@@ -30,16 +30,16 @@ export default {
     const {
       value: inputValue,
       errorMessage,
-      handleBlur,
+      setErrors
     } = useField(props.name, undefined, {
       initialValue: props.value,
-      syncVModel: true
+      syncVModel: true,
+      validateOnValueUpdate: false
     })
 
     return {
       inputValue,
       errorMessage,
-      handleBlur,
     }
   }
 }
@@ -55,7 +55,7 @@ export default {
         :class="{ filled: !!inputValue }"
         placeholder="Поиск"
         :name="name"
-        @blur="handleBlur"
+        @focus="setErrors"
         ref="searchEl"
         v-model="inputValue"
     />
