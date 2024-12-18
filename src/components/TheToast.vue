@@ -1,25 +1,25 @@
 <script>
 import success from '@/assets/img/success.gif'
-import TransitionSlideFade from "@/components/TransitionSlideFade.vue";
+import TransitionSlideFade from '@/components/TransitionSlideFade.vue'
 
 export default {
   name: 'TheToast',
-  components: {TransitionSlideFade},
+  components: { TransitionSlideFade },
   data() {
-    return {success}
+    return { success }
   },
   computed: {
     toast() {
       return this.$store.state.toast
     }
-  },
+  }
 }
 </script>
 
 <template>
   <TransitionSlideFade>
     <div class="toast" v-if="toast">
-      <img :src="success" alt="Успех"/>
+      <img :src="success" alt="Успех" />
       {{ toast }}
     </div>
   </TransitionSlideFade>

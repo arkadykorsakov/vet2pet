@@ -1,11 +1,11 @@
 <script>
 import ArrowLeftIcon from '@/icons/ArrowLeftIcon.vue'
 import ArrowRightIcon from '@/icons/ArrowRightIcon.vue'
-import {range} from 'lodash'
+import { range } from 'lodash'
 
 export default {
   name: 'AppPagination',
-  components: {ArrowRightIcon, ArrowLeftIcon},
+  components: { ArrowRightIcon, ArrowLeftIcon },
   props: {
     countPages: {
       type: Number,
@@ -22,9 +22,9 @@ export default {
       if (this.countPages < 6) return range(1, this.countPages + 1)
       if ([1, 2, 3].includes(this.currentPage)) return range(1, 6)
       if (
-          range(this.countPages - 2, this.countPages + 1).includes(
-              this.currentPage
-          )
+        range(this.countPages - 2, this.countPages + 1).includes(
+          this.currentPage
+        )
       )
         return range(this.countPages - 4, this.countPages + 1)
       return range(this.currentPage - 2, this.currentPage + 3)
@@ -55,29 +55,29 @@ export default {
   <ul class="pagination" v-if="pages.length > 1">
     <li class="pagination__item pagination__item_prev">
       <button
-          class="pagination__btn"
-          :disabled="currentPage === 1"
-          @click="changePage(currentPage - 1)"
+        class="pagination__btn"
+        :disabled="currentPage === 1"
+        @click="changePage(currentPage - 1)"
       >
-        <ArrowLeftIcon/>
+        <ArrowLeftIcon />
       </button>
     </li>
     <li class="pagination__item" v-for="item in pages" :key="item">
       <button
-          class="pagination__btn"
-          :class="{ active: item === currentPage }"
-          @click="changePage(item)"
+        class="pagination__btn"
+        :class="{ active: item === currentPage }"
+        @click="changePage(item)"
       >
         {{ item }}
       </button>
     </li>
     <li class="pagination__item pagination__item_next">
       <button
-          class="pagination__btn"
-          :disabled="currentPage === countPages"
-          @click="changePage(currentPage + 1)"
+        class="pagination__btn"
+        :disabled="currentPage === countPages"
+        @click="changePage(currentPage + 1)"
       >
-        <ArrowRightIcon/>
+        <ArrowRightIcon />
       </button>
     </li>
   </ul>

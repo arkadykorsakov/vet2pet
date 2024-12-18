@@ -22,17 +22,34 @@ export function formatCurrency(value, options = {}) {
   return new Intl.NumberFormat(locale, formatOptions).format(value)
 }
 
-export function formatTime(date) {
-  const options = {
-    year: '2-digit',
-    month: 'numeric',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
+export function formatDateTime(val, format = 'datetime') {
+  if (!val) return ''
+
+  const optionsMap = {
+    datetime: {
+      year: '2-digit',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    },
+    date: {
+      year: '2-digit',
+      month: 'numeric',
+      day: 'numeric'
+    },
+    time: {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }
   }
 
-  const formatter = new Intl.DateTimeFormat('ru-RU', options)
-  const formattedDate = formatter.format(date)
+  const options = optionsMap[format]
+  if (!options) throw new Error(`Unknown format: ${format}`)
 
-  return formattedDate.replace(',', ' в')
+  const formatter = new Intl.DateTimeFormat('ru-RU', options)
+  const formatted = formatter.format(val)
+
+  return format === 'datetime' ? formatted.replace(',', ' в') : formatted
 }

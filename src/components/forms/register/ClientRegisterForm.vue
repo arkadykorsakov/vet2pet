@@ -99,7 +99,11 @@ export default {
           type="email"
           class="default-form-group"
         />
-        <AppPassword label="Пароль" name="password" class="default-form-group" />
+        <AppPassword
+          label="Пароль"
+          name="password"
+          class="default-form-group"
+        />
         <AppPassword
           label="Повторите пароль"
           name="confirm_password"

@@ -1,24 +1,25 @@
 <script>
 export default {
-  name: "AppTitle",
+  name: 'AppTitle',
   props: {
     tag: {
       type: String,
       required: false,
       default: 'h1',
-      validator: value => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h6'].includes(value)
+      validator: (value) =>
+        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h6'].includes(value)
     },
     size: {
       type: String,
       required: false,
       default: 'md',
-      validator: value => ['md', 'lg'].includes(value)
+      validator: (value) => ['md', 'lg'].includes(value)
     },
     color: {
       type: String,
       required: false,
       default: 'secondary',
-      validator: value => ['primary', 'secondary'].includes(value)
+      validator: (value) => ['primary', 'secondary'].includes(value)
     }
   }
 }
@@ -26,14 +27,13 @@ export default {
 
 <template>
   <component :is="tag" class="title" :class="[size, color]">
-    <slot/>
+    <slot />
   </component>
 </template>
 
 <style scoped>
 .title.md {
   font-size: 36px;
-
 }
 
 .title.lg {

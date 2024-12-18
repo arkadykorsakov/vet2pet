@@ -1,12 +1,12 @@
 <script>
-import AppTitle from "@/components/AppTitle.vue";
-import XSecondIcon from "@/icons/XSecondIcon.vue";
-import TransitionFadeIn from "@/components/TransitionFadeIn.vue";
-import ModalFormButtons from "@/components/ModalFormButtons.vue";
+import AppTitle from '@/components/AppTitle.vue'
+import XSecondIcon from '@/icons/XSecondIcon.vue'
+import TransitionFadeIn from '@/components/TransitionFadeIn.vue'
+import ModalFormButtons from '@/components/ModalFormButtons.vue'
 
 export default {
-  name: "AppModal",
-  components: {ModalFormButtons, TransitionFadeIn, XSecondIcon, AppTitle,},
+  name: 'AppModal',
+  components: { ModalFormButtons, TransitionFadeIn, XSecondIcon, AppTitle },
   props: {
     title: {
       type: String,
@@ -17,13 +17,13 @@ export default {
       required: true
     }
   },
-  emits: ["close"],
+  emits: ['close'],
   watch: {
     show() {
       if (this.show) {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden'
       } else {
-        document.body.style.overflow = null;
+        document.body.style.overflow = null
       }
     }
   },
@@ -33,7 +33,7 @@ export default {
     },
     closeOnEscape(e) {
       if (e.key === 'Escape' && this.show) {
-        this.close();
+        this.close()
       }
     }
   },
@@ -41,8 +41,8 @@ export default {
     document.addEventListener('keydown', this.closeOnEscape)
   },
   unmounted() {
-    document.removeEventListener('keydown', this.closeOnEscape);
-    document.body.style.overflow = null;
+    document.removeEventListener('keydown', this.closeOnEscape)
+    document.body.style.overflow = null
   }
 }
 </script>
@@ -52,13 +52,13 @@ export default {
     <div class="modal" v-if="show" @click.self="close">
       <div class="modal__card">
         <button class="modal__close" type="button" @click="close">
-          <XSecondIcon/>
+          <XSecondIcon />
         </button>
         <div class="modal__header">
           <AppTitle tag="h2">{{ title }}</AppTitle>
         </div>
         <div class="modal__body">
-          <slot/>
+          <slot />
         </div>
       </div>
     </div>

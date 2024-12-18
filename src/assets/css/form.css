@@ -35,7 +35,8 @@
 
 .default-label {
     position: absolute;
-    top: 18px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 12px;
     -webkit-border-radius: var(--base-rounded);
     -moz-border-radius: var(--base-rounded);
@@ -44,6 +45,10 @@
     background: transparent;
     transition: all 0.3s ease;
     cursor: text;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .default-input:focus + .default-label,
@@ -52,6 +57,10 @@ input.default-input:-webkit-autofill + .default-label {
     background: var(--on-primary);
     top: -8px;
     font-size: 12px;
+    transform: translateY(0);
+    -webkit-line-clamp: 1;
+    max-width: calc(100% - 24px);
+
 }
 
 .default-input.error {
@@ -82,4 +91,14 @@ input[type="number"] {
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     display: none;
+}
+
+.form__row {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+}
+
+.form__row:not(:last-child) {
+    margin-bottom: 24px;
 }

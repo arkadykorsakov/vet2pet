@@ -15,7 +15,7 @@ export default {
         {label: "Комментарий", field: "comment", sortable: true, align: 'left'},
         {
           label: "Дата", field: "created", sortable: true, align: 'left',
-          format: 'date'
+          format: 'datetime'
         },
       ],
       fakeData: [

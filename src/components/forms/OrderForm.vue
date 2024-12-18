@@ -4,19 +4,26 @@ import ModalFormButtons from '@/components/ModalFormButtons.vue'
 import * as yup from 'yup'
 import {REQUIRED_MSG} from '@/consts.js'
 import AppSelect from '@/components/AppSelect.vue'
-import AppTextarea from "@/components/AppTextarea.vue";
-import AppDatePicker from "@/components/AppDatePicker.vue";
-import {markRaw} from "vue";
-import AppLoading from "@/components/AppLoading.vue";
+import AppTextarea from '@/components/AppTextarea.vue'
+import AppDatePicker from '@/components/AppDatePicker.vue'
+import {markRaw} from 'vue'
+import AppLoading from '@/components/AppLoading.vue'
 
 export default {
   name: 'OrderForm',
-  components: {AppLoading, AppDatePicker, AppTextarea, AppSelect, ModalFormButtons, Form},
+  components: {
+    AppLoading,
+    AppDatePicker,
+    AppTextarea,
+    AppSelect,
+    ModalFormButtons,
+    Form
+  },
   props: {
     isEdit: {
       type: Boolean,
       default: false
-    },
+    }
   },
   emits: ['close'],
   data() {
@@ -31,10 +38,7 @@ export default {
           .required(REQUIRED_MSG),
       vet_consultation_type_id: yup.string().required(REQUIRED_MSG),
       vet_id: yup.string().required(REQUIRED_MSG),
-      term: yup
-          .date()
-          .typeError('Невалидная дата')
-          .required(REQUIRED_MSG)
+      term: yup.date().typeError('Невалидная дата').required(REQUIRED_MSG)
     }
     if (this.isEdit) {
       rules['commentChat'] = yup.string().required(REQUIRED_MSG)
@@ -90,7 +94,10 @@ export default {
       console.log(values)
       resetForm()
       this.$emit('close')
-      this.$store.dispatch('setToast', this.isEdit ? 'Заказ обновлен' : 'Заказ создан')
+      this.$store.dispatch(
+          'setToast',
+          this.isEdit ? 'Заказ обновлен' : 'Заказ создан'
+      )
     }
   },
   async mounted() {
@@ -99,13 +106,13 @@ export default {
       this.initialValues = {
         pet_id: 1,
         vet_service_id: 3,
-        symptoms: "Кашель, усталость",
-        comment: "Питомец стал вялым после прогулки.",
-        commentChat: "Обсудить возможность онлайн-консультации.",
-        term: "2024-12-15",
-        date_symptoms: "2024-12-15",
+        symptoms: 'Кашель, усталость',
+        comment: 'Питомец стал вялым после прогулки.',
+        commentChat: 'Обсудить возможность онлайн-консультации.',
+        term: '2024-12-15',
+        date_symptoms: '2024-12-15',
         vet_consultation_type_id: 2,
-        vet_id: 5,
+        vet_id: 5
       }
     }
     this.isLoading = false
@@ -115,7 +122,13 @@ export default {
 
 <template>
   <AppLoading v-if="isLoading"/>
-  <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ isSubmitting }" :initial-values="initialValues" v-else>
+  <Form
+      @submit="onSubmit"
+      :validation-schema="schema"
+      v-slot="{ isSubmitting, meta }"
+      :initial-values="initialValues"
+      v-else
+  >
     <div class="form__body">
       <div class="form__row">
         <AppSelect
@@ -141,20 +154,16 @@ export default {
             item-title="name"
             item-value="id"
         />
-        <AppDatePicker label="Дата симптомов" name="date_symptoms"
-        />
+        <AppDatePicker label="Дата симптомов" name="date_symptoms"/>
       </div>
       <div class="form__row">
-        <AppTextarea label="Комментарий" name="comment"
-        />
+        <AppTextarea label="Комментарий" name="comment"/>
       </div>
       <div class="form__row">
-        <AppTextarea label="Описание симптомов" name="symptoms"
-        />
+        <AppTextarea label="Описание симптомов" name="symptoms"/>
       </div>
       <div class="form__row" v-if="isEdit">
-        <AppTextarea label="Комментарий ChatGPT" name="commentChat"
-        />
+        <AppTextarea label="Комментарий ChatGPT" name="commentChat"/>
       </div>
       <div class="form__row">
         <AppSelect
@@ -163,24 +172,13 @@ export default {
             :items="responsibleVets"
             item-title="fullName"
             item-value="id"
-
         />
-        <AppDatePicker name="term" label="Срок заявки"
-        />
+        <AppDatePicker name="term" label="Срок заявки"/>
       </div>
     </div>
-    <ModalFormButtons :disabled-submit="isSubmitting" @cancel="$emit('close')"/>
+    <ModalFormButtons
+        :disabled-submit="isSubmitting || !meta.valid"
+        @cancel="$emit('close')"
+    />
   </Form>
 </template>
-
-<style scoped>
-.form__row {
-  display: flex;
-  gap: 24px;
-  width: 100%;
-}
-
-.form__row:not(:last-child) {
-  margin-bottom: 24px;
-}
-</style>

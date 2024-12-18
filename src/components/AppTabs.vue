@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "AppTabs",
+  name: 'AppTabs',
   props: {
     tabs: {
       type: Array,
@@ -11,7 +11,7 @@ export default {
       required: false
     }
   },
-  emits: ['changeTab'],
+  emits: ['changeTab']
 }
 </script>
 
@@ -19,13 +19,17 @@ export default {
   <div class="tab" v-if="tabs.length">
     <ul class="tab-nav">
       <li class="tab-nav__item" v-for="tab in tabs" :key="tab.val">
-        <button class="tab-nav__link" :class="{active:selectedTab === tab.val}" @click="$emit('changeTab', tab.val)">
+        <button
+          class="tab-nav__link"
+          :class="{ active: selectedTab === tab.val }"
+          @click="$emit('changeTab', tab.val)"
+        >
           {{ tab.label }}
         </button>
       </li>
     </ul>
     <div class="tab-content">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
@@ -61,7 +65,6 @@ export default {
 .tab-nav__link.active {
   background: var(--inverse-primary);
   color: #000;
-
 }
 
 .tab-nav__item:not(:last-child) {

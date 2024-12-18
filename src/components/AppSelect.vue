@@ -1,7 +1,7 @@
 <script>
-import {useId} from 'vue'
-import {useField} from 'vee-validate'
-import {onClickOutside} from '@vueuse/core'
+import { useId } from 'vue'
+import { useField } from 'vee-validate'
+import { onClickOutside } from '@vueuse/core'
 import ErrorIcon from '@/icons/ErrorIcon.vue'
 import ArrowIcon from '@/icons/ArrowIcon.vue'
 import AppFormError from '@/components/AppFormError.vue'
@@ -9,7 +9,7 @@ import TransitionFadeIn from '@/components/TransitionFadeIn.vue'
 
 export default {
   name: 'AppSelect',
-  components: {TransitionFadeIn, ArrowIcon, ErrorIcon, AppFormError},
+  components: { TransitionFadeIn, ArrowIcon, ErrorIcon, AppFormError },
   props: {
     items: {
       type: Array,
@@ -55,7 +55,7 @@ export default {
     selectContent() {
       if (this.items.length) {
         const activeEl = this.items.find(
-            (option) => option[this.itemValue] === this.selectValue
+          (option) => option[this.itemValue] === this.selectValue
         )
         return activeEl ? activeEl[this.itemTitle] : ''
       }
@@ -67,7 +67,6 @@ export default {
       value: selectValue,
       errorMessage,
       handleBlur,
-      handleChange
     } = useField(props.name, undefined, {
       initialValue: props.value,
       syncVModel: true
@@ -76,13 +75,17 @@ export default {
       selectValue,
       errorMessage,
       handleBlur,
-      handleChange
     }
   },
   mounted() {
     onClickOutside(this.$refs.formGroupEl, () => {
       this.isOpen = false
     })
+  },
+  watch:{
+    selectValue(newValue) {
+      this.isOpen = false
+    }
   }
 }
 </script>
@@ -91,47 +94,42 @@ export default {
   <div class="default-form-group" ref="formGroupEl">
     <div class="default-field">
       <button
-          type="button"
-          class="select__content default-input"
-          :class="{ filled: isOpen || !!selectValue, error: !!errorMessage }"
-          @click="isOpen = !isOpen"
-          :disabled="disabled"
+        type="button"
+        class="select__content default-input"
+        :class="{ filled: isOpen || !!selectValue, error: !!errorMessage }"
+        @click="isOpen = !isOpen"
+        :disabled="disabled"
       >
         {{ selectContent }}
       </button>
       <div class="default-label form__label" @click="isOpen = !isOpen">
         {{ label }}
       </div>
-      <ArrowIcon class="select__arrow" :class="{ reverse: isOpen }"/>
-      <ErrorIcon v-if="errorMessage" class="default-error-icon"/>
+      <ArrowIcon class="select__arrow" :class="{ reverse: isOpen }" />
+      <ErrorIcon v-if="errorMessage" class="default-error-icon" />
       <TransitionFadeIn>
         <div class="select-items" v-if="isOpen">
           <ul v-if="items?.length" class="select-items__list">
             <li
-                v-for="(option, idx) in items"
-                :key="option[itemValue]"
-                class="select-option"
+              v-for="(option, idx) in items"
+              :key="option[itemValue]"
+              class="select-option"
             >
               <input
-                  type="radio"
-                  :name="name"
-                  :value="option[itemValue]"
-                  :id="id + idx"
-                  @change="
-                  (val) => {
-                    isOpen = false
-                    handleChange(val)
-                  }
-                "
-                  class="select-option__radio"
-                  tabindex="-1"
-                  v-model="selectValue"
+                type="radio"
+                :name="name"
+                :value="option[itemValue]"
+                :id="id + idx"
+                @blur="handleBlur"
+                class="select-option__radio"
+                tabindex="-1"
+                v-model="selectValue"
               />
               <label
-                  :for="id + idx"
-                  class="select-option__text"
-                  tabindex="0"
-                  @keydown.space="
+                :for="id + idx"
+                class="select-option__text"
+                tabindex="0"
+                @keydown.space="
                   ($event) => $event.target.previousSibling.click()
                 "
               >
@@ -142,7 +140,7 @@ export default {
         </div>
       </TransitionFadeIn>
     </div>
-    <AppFormError v-if="errorMessage" :error-message="errorMessage"/>
+    <AppFormError v-if="errorMessage" :error-message="errorMessage" />
   </div>
 </template>
 

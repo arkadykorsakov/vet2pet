@@ -1,11 +1,11 @@
 <script>
 import DashboardHeader from '@/components/DashboardHeader.vue'
 import AppTable from '@/components/AppTable.vue'
-import OrderForm from "@/components/forms/OrderForm.vue"
+import OrderForm from '@/components/forms/OrderForm.vue'
 
 export default {
   name: 'OrdersView',
-  components: {AppTable, DashboardHeader, OrderForm},
+  components: { AppTable, DashboardHeader, OrderForm },
   data() {
     return {
       tableHeaders: [
@@ -41,7 +41,7 @@ export default {
           label: 'Дата заявки',
           field: 'created',
           sortable: true,
-          format: 'date'
+          format: 'datetime'
         }
       ],
       fakeData: [
@@ -212,34 +212,38 @@ export default {
   computed: {
     filteredData() {
       return this.search
-          ? [...this.fakeData].filter((item) =>
-              item.vet_full_name.toLowerCase().includes(this.search.toLowerCase())
+        ? [...this.fakeData].filter((item) =>
+            item.vet_full_name.toLowerCase().includes(this.search.toLowerCase())
           )
-          : [...this.fakeData]
+        : [...this.fakeData]
     }
-  },
+  }
 }
 </script>
 
-<script setup>
-</script>
+<script setup></script>
 
 <template>
   <div class="orders-view">
     <DashboardHeader
-        title="Заказы"
-        searchable
-        addable
-        @search="(val) => (search = val)"
-        title-modal-add="Новая заявка"
+      title="Заказы"
+      searchable
+      addable
+      @search="(val) => (search = val)"
+      title-modal-add="Новая заявка"
     >
-      <template #modal="{close}">
-        <OrderForm @close="close"/>
+      <template #modal="{ close }">
+        <OrderForm @close="close" />
       </template>
     </DashboardHeader>
-    <AppTable :rows="filteredData" :columns="tableHeaders" editable title-modal-edit="Редактирование заявки">
-      <template #modal="{close}">
-        <OrderForm @close="close" is-edit/>
+    <AppTable
+      :rows="filteredData"
+      :columns="tableHeaders"
+      editable
+      title-modal-edit="Редактирование заявки"
+    >
+      <template #modal="{ close }">
+        <OrderForm @close="close" is-edit />
       </template>
     </AppTable>
   </div>

@@ -19,7 +19,7 @@ export default {
 
 <template>
   <component :is="`${layout}-layout`">
-    <RouterView/>
+    <RouterView />
   </component>
-  <TheToast/>
+  <TheToast />
 </template>

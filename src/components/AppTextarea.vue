@@ -1,12 +1,12 @@
 <script>
-import {useId} from 'vue'
-import {useField} from 'vee-validate'
-import ErrorIcon from "@/icons/ErrorIcon.vue";
-import AppFormError from "@/components/AppFormError.vue";
+import { useId } from 'vue'
+import { useField } from 'vee-validate'
+import ErrorIcon from '@/icons/ErrorIcon.vue'
+import AppFormError from '@/components/AppFormError.vue'
 
 export default {
   name: 'AppTextarea',
-  components: {ErrorIcon, AppFormError},
+  components: { ErrorIcon, AppFormError },
   data() {
     return {
       id: useId()
@@ -39,7 +39,6 @@ export default {
       value: inputValue,
       errorMessage,
       handleBlur,
-      handleChange
     } = useField(props.name, undefined, {
       initialValue: props.value
     })
@@ -48,7 +47,6 @@ export default {
       inputValue,
       errorMessage,
       handleBlur,
-      handleChange
     }
   }
 }
@@ -58,21 +56,19 @@ export default {
   <div class="default-form-group">
     <div class="default-field">
       <textarea
-          class="default-input"
-          :class="{ error: !!errorMessage, filled: !!inputValue }"
-          :id="id"
-          :name="name"
-          @input="handleChange"
-          @change="handleChange"
-          @blur="handleBlur"
-          v-model="inputValue"
-          :disabled="disabled"
+        class="default-input"
+        :class="{ error: !!errorMessage, filled: !!inputValue }"
+        :id="id"
+        :name="name"
+        @blur="handleBlur"
+        v-model="inputValue"
+        :disabled="disabled"
       >
       </textarea>
       <label class="default-label" :for="id">{{ label }}</label>
-      <ErrorIcon v-if="errorMessage" class="default-error-icon"/>
+      <ErrorIcon v-if="errorMessage" class="default-error-icon" />
     </div>
-    <AppFormError v-if="errorMessage" :error-message="errorMessage"/>
+    <AppFormError v-if="errorMessage" :error-message="errorMessage" />
   </div>
 </template>
 

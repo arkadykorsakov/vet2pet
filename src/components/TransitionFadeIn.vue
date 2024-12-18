@@ -1,12 +1,12 @@
 <script>
 export default {
-  name: "TransitionFadeIn"
+  name: 'TransitionFadeIn'
 }
 </script>
 
 <template>
   <Transition>
-    <slot/>
+    <slot />
   </Transition>
 </template>
 

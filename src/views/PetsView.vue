@@ -1,14 +1,14 @@
 <script>
-import DashboardHeader from "@/components/DashboardHeader.vue";
+import DashboardHeader from '@/components/DashboardHeader.vue'
 
 export default {
-  name: "PetsView" ,
-  components: {DashboardHeader}
+  name: 'PetsView',
+  components: { DashboardHeader }
 }
 </script>
 
 <template>
   <div class="pets-view">
-    <DashboardHeader title="Питомцы"/>
+    <DashboardHeader title="Питомцы" />
   </div>
 </template>

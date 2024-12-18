@@ -1,14 +1,14 @@
 <script>
-import AppDivider from "@/components/AppDivider.vue";
-import AppButton from "@/components/AppButton.vue";
+import AppDivider from '@/components/AppDivider.vue'
+import AppButton from '@/components/AppButton.vue'
 
 export default {
-  name: "ModalFormButtons",
-  components: {AppButton, AppDivider},
+  name: 'ModalFormButtons',
+  components: { AppButton, AppDivider },
   props: {
     labelActionBtn: {
       type: String,
-      default: "Сохранить",
+      default: 'Сохранить'
     },
     disabledSubmit: {
       type: Boolean,
@@ -21,10 +21,12 @@ export default {
 
 <template>
   <div class="form-down">
-    <AppDivider class="form-down__divider"/>
+    <AppDivider class="form-down__divider" />
     <div class="form-down__buttons">
       <AppButton color="white" @click="$emit('cancel')">Отмена</AppButton>
-      <AppButton type="submit" :disabled="disabledSubmit">{{ labelActionBtn }}</AppButton>
+      <AppButton type="submit" :disabled="disabledSubmit">{{
+        labelActionBtn
+      }}</AppButton>
     </div>
   </div>
 </template>

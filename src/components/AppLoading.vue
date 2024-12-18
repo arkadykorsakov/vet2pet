@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "AppLoading"
+  name: 'AppLoading'
 }
 </script>
 
@@ -28,7 +28,7 @@ export default {
 
 .dot-spinner {
   --uib-size: 2.8rem;
-  --uib-speed: .9s;
+  --uib-speed: 0.9s;
   --uib-color: #00696b;
   position: relative;
   display: flex;

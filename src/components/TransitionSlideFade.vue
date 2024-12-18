@@ -1,12 +1,12 @@
 <script>
 export default {
-  name: "TransitionSlideFade"
+  name: 'TransitionSlideFade'
 }
 </script>
 
 <template>
   <Transition name="slide-fade">
-    <slot/>
+    <slot />
   </Transition>
 </template>
 

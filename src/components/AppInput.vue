@@ -1,12 +1,12 @@
 <script>
-import {useId} from 'vue'
-import {useField} from 'vee-validate'
-import ErrorIcon from "@/icons/ErrorIcon.vue";
-import AppFormError from "@/components/AppFormError.vue";
+import { useId } from 'vue'
+import { useField } from 'vee-validate'
+import ErrorIcon from '@/icons/ErrorIcon.vue'
+import AppFormError from '@/components/AppFormError.vue'
 
 export default {
   name: 'AppInput',
-  components: {ErrorIcon, AppFormError},
+  components: { ErrorIcon, AppFormError },
   data() {
     return {
       id: useId()
@@ -38,18 +38,21 @@ export default {
       type: Number,
       default: undefined
     },
+    step: {
+      type: Number,
+      default: undefined
+    },
     modelValue: {
       type: String,
       default: undefined
     },
-    disabled: {type: Boolean, default: false},
+    disabled: { type: Boolean, default: false }
   },
   setup(props) {
     const {
       value: inputValue,
       errorMessage,
       handleBlur,
-      handleChange
     } = useField(props.name, undefined, {
       initialValue: props.value,
       syncVModel: true
@@ -59,7 +62,6 @@ export default {
       inputValue,
       errorMessage,
       handleBlur,
-      handleChange
     }
   }
 }
@@ -69,22 +71,21 @@ export default {
   <div class="default-form-group">
     <div class="default-field">
       <input
-          class="default-input"
-          :class="{ error: !!errorMessage, filled: !!inputValue }"
-          :type="type"
-          :id="id"
-          :name="name"
-          :value="inputValue"
-          @input="handleChange"
-          @change="handleChange"
-          @blur="handleBlur"
-          :min="min"
-          :max="max"
-          :disabled="disabled"
+        class="default-input"
+        :class="{ error: !!errorMessage, filled: !!inputValue }"
+        :type="type"
+        :id="id"
+        :name="name"
+        @blur="handleBlur"
+        :min="min"
+        :max="max"
+        :disabled="disabled"
+        :step="step"
+        v-model="inputValue"
       />
       <label class="default-label" :for="id">{{ label }}</label>
-      <ErrorIcon v-if="errorMessage" class="default-error-icon"/>
+      <ErrorIcon v-if="errorMessage" class="default-error-icon" />
     </div>
-    <AppFormError v-if="errorMessage" :error-message="errorMessage"/>
+    <AppFormError v-if="errorMessage" :error-message="errorMessage" />
   </div>
 </template>

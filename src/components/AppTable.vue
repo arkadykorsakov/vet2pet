@@ -5,8 +5,8 @@ import SortAscIcon from '@/icons/SortAscIcon.vue'
 import SortDescIcon from '@/icons/SortDescIcon.vue'
 import AppModal from '@/components/AppModal.vue'
 import AppPagination from '@/components/AppPagination.vue'
-import {chunk} from 'lodash'
-import {formatCurrency, formatNumber, formatTime} from '@/utils/formatter'
+import { chunk } from 'lodash'
+import { formatCurrency, formatNumber, formatDateTime } from '@/utils/formatter'
 
 export default {
   name: 'AppTable',
@@ -19,8 +19,8 @@ export default {
     SortDescIcon
   },
   props: {
-    columns: {type: Array, required: true},
-    rows: {type: Array, required: true},
+    columns: { type: Array, required: true },
+    rows: { type: Array, required: true },
     editable: {
       type: Boolean,
       default: false
@@ -76,8 +76,8 @@ export default {
     formatCurrency(value, options) {
       return formatCurrency(value, options)
     },
-    formatTime(value) {
-      return formatTime(value)
+    formatDateTime(value, format = 'datetime') {
+      return formatDateTime(value, format)
     }
   },
   computed: {
@@ -99,17 +99,17 @@ export default {
     <div class="table-wrapper">
       <table class="table">
         <thead>
-        <tr>
-          <th
+          <tr>
+            <th
               scope="col"
               v-for="(col, colIdx) in columns"
               :key="colIdx"
               :style="col.style ? col.style : null"
-          >
+            >
               <span
-                  class="table__sort"
-                  v-if="col.sortable"
-                  :style="{
+                class="table__sort"
+                v-if="col.sortable"
+                :style="{
                   justifyContent: col.align
                 }"
               >
@@ -117,73 +117,79 @@ export default {
                   {{ col.label }}
                 </span>
                 <button
-                    type="button"
-                    @click="setSort(col.field)"
-                    :aria-label="`Сортировка по полю ${col.label}`"
+                  type="button"
+                  @click="setSort(col.field)"
+                  :aria-label="`Сортировка по полю ${col.label}`"
                 >
-                  <SortDefaultIcon v-if="sortField !== col.field"/>
+                  <SortDefaultIcon v-if="sortField !== col.field" />
                   <component
-                      v-else
-                      :is="sortBy === 'asc' ? 'SortAscIcon' : 'SortDescIcon'"
+                    v-else
+                    :is="sortBy === 'asc' ? 'SortAscIcon' : 'SortDescIcon'"
                   />
                 </button>
               </span>
-            <span v-else>
+              <span v-else>
                 {{ col.label }}
               </span>
-          </th>
-          <th v-if="editable"></th>
-        </tr>
+            </th>
+            <th v-if="editable"></th>
+          </tr>
         </thead>
         <tbody>
-        <tr
+          <tr
             v-for="(row, rowIdx) in paginatedRows[currentPage - 1]"
             :key="rowIdx"
-        >
-          <td
+          >
+            <td
               v-for="(col, colIdx) in columns"
               :key="colIdx"
               :style="col.style ? col.style : null"
               :align="col.align"
-          >
-            <template v-if="col.format === 'currency'">
-              {{ formatCurrency(row[`${col.field}`]) }}
-            </template>
-            <template v-else-if="col.format === 'number'">
-              {{ formatNumber(row[`${col.field}`]) }}
-            </template>
-            <template v-else-if="col.format === 'date'">
-              {{ formatTime(new Date(row[`${col.field}`])) }}
-            </template>
-            <template v-else>
-              {{ row[`${col.field}`] }}
-            </template>
-          </td>
-          <td v-if="editable" class="table__edit">
-            <div>
-              <button
+            >
+              <template v-if="col.format === 'currency'">
+                {{ formatCurrency(row[`${col.field}`]) }}
+              </template>
+              <template v-else-if="col.format === 'number'">
+                {{ formatNumber(row[`${col.field}`]) }}
+              </template>
+              <template v-else-if="col.format === 'datetime'">
+                {{ formatDateTime(new Date(row[`${col.field}`])) }}
+              </template>
+              <template v-else-if="col.format === 'date'">
+                {{ formatDateTime(new Date(row[`${col.field}`]), 'date') }}
+              </template>
+              <template v-else-if="col.format === 'time'">
+                {{ formatDateTime(new Date(row[`${col.field}`]), 'time') }}
+              </template>
+              <template v-else>
+                {{ row[`${col.field}`] }}
+              </template>
+            </td>
+            <td v-if="editable" class="table__edit">
+              <div>
+                <button
                   type="button"
                   aria-label="Редактировать"
                   @click="openModal"
-              >
-                <GearWheelIcon/>
-              </button>
-            </div>
-          </td>
-        </tr>
+                >
+                  <GearWheelIcon />
+                </button>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
     <div class="pagination-wrapper">
       <AppPagination
-          :count-pages="paginatedRows.length"
-          :current-page="currentPage"
-          @change-page="(page) => (currentPage = page)"
+        :count-pages="paginatedRows.length"
+        :current-page="currentPage"
+        @change-page="(page) => (currentPage = page)"
       />
     </div>
     <teleport to="body" v-if="editable">
       <AppModal :title="titleModalEdit" :show="show" @close="closeModal">
-        <slot name="modal" :close="closeModal"/>
+        <slot name="modal" :close="closeModal" />
       </AppModal>
     </teleport>
   </div>

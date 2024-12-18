@@ -31,7 +31,11 @@ export default {
       menu: [
         { label: 'Главная', link: '/', icon: 'HomeIcon' },
         { label: 'Заявки', link: '/orders', icon: 'ListIcon' },
-        { label: 'Ветеринарные услуги', link: '/vet-services', icon: 'PaperIcon' },
+        {
+          label: 'Ветеринарные услуги',
+          link: '/vet-services',
+          icon: 'PaperIcon'
+        },
         { label: 'Питомцы', link: '/pets', icon: 'AnimalIcon' },
         { label: 'Пользователи', link: '/users', icon: 'UserIcon' },
         { label: 'Отзывы', link: '/reviews', icon: 'HeartIcon' },

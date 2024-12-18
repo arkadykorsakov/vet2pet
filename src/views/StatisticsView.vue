@@ -1,9 +1,9 @@
 <script>
-import AppTitle from "@/components/AppTitle.vue";
+import AppTitle from '@/components/AppTitle.vue'
 
 export default {
-  name: "StatisticsView",
-  components: {AppTitle}
+  name: 'StatisticsView',
+  components: { AppTitle }
 }
 </script>
 

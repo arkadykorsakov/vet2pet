@@ -1,11 +1,11 @@
 <script>
 export default {
-  name: "AppDivider"
+  name: 'AppDivider'
 }
 </script>
 
 <template>
-  <hr class="divider">
+  <hr class="divider" />
 </template>
 
 <style scoped>

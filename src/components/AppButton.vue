@@ -62,7 +62,7 @@ export default {
   border-color: var(--primary-fixed);
 }
 .btn.white:hover,
-.btn.transparent:hover{
+.btn.transparent:hover {
   background-color: rgba(var(--primary-fixed-rgb), 0.1);
 }
 .btn.white:active,
