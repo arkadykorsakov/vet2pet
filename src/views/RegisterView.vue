@@ -30,7 +30,6 @@ export default {
   methods: {
     changeTab(form) {
       this.activeForm = form
-      this.$router.push({ query: { form } })
     }
   }
 }
@@ -39,7 +38,7 @@ export default {
 <template>
   <div class="register">
     <AppTitle size="lg" class="register__title">Регистрация</AppTitle>
-    <AppTabs :tabs="forms" :selected-tab="activeForm" @change-tab="changeTab">
+    <AppTabs :tabs="forms" :selected-tab="activeForm" @change-tab="changeTab" query-name="form">
       <div v-if="activeForm === 'client'">
         <KeepAlive>
           <ClientRegisterForm />

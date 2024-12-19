@@ -117,7 +117,7 @@ export default {
 }
 
 .form__input:disabled {
-  color: transparent !important;
+  color: transparent;
 }
 
 .form__input.error {
