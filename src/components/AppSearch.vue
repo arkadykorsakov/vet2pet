@@ -1,14 +1,13 @@
 <script>
-import {useId} from 'vue'
-import {useField} from 'vee-validate'
+import { useId } from 'vue'
+import { useField } from 'vee-validate'
 import SearchIcon from '@/icons/SearchIcon.vue'
 
 export default {
   name: 'AppSearch',
-  components: {SearchIcon},
+  components: { SearchIcon },
   data() {
     return {
-      id: useId(),
       searchEl: null
     }
   },
@@ -27,19 +26,22 @@ export default {
     }
   },
   setup(props) {
-    const {
-      value: inputValue,
-      errorMessage,
-      setErrors
-    } = useField(props.name, undefined, {
-      initialValue: props.value,
-      syncVModel: true,
-      validateOnValueUpdate: false
-    })
+    const { value: inputValue, errorMessage } = useField(
+      props.name,
+      undefined,
+      {
+        initialValue: props.value,
+        syncVModel: true,
+        validateOnValueUpdate: false
+      }
+    )
+
+    const id = useId()
 
     return {
       inputValue,
       errorMessage,
+      id
     }
   }
 }
@@ -47,17 +49,17 @@ export default {
 
 <template>
   <div class="form__field">
-    <SearchIcon class="form__icon" @click="$refs.searchEl.focus()"/>
+    <SearchIcon class="form__icon" @click="$refs.searchEl.focus()" />
     <input
-        type="search"
-        :id="id"
-        class="form__input"
-        :class="{ filled: !!inputValue }"
-        placeholder="Поиск"
-        :name="name"
-        @focus="setErrors"
-        ref="searchEl"
-        v-model="inputValue"
+      type="search"
+      :id="id"
+      class="form__input"
+      :class="{ filled: !!inputValue }"
+      placeholder="Поиск"
+      :name="name"
+      @focus="setErrors"
+      ref="searchEl"
+      v-model="inputValue"
     />
     <label class="visually-hidden" :for="id">Поиск</label>
   </div>

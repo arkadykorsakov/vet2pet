@@ -78,10 +78,6 @@ input.default-input:-webkit-autofill + .default-label {
     top: 16px;
 }
 
-.default-form-group:not(:last-child) {
-    margin-bottom: 12px;
-}
-
 input[type="number"] {
     -moz-appearance: textfield;
     -webkit-appearance: textfield;

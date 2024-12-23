@@ -1,6 +1,6 @@
 <script>
-import {useId} from 'vue'
-import {useField} from 'vee-validate'
+import { useId } from 'vue'
+import { useField } from 'vee-validate'
 import EyeIcon from '@/icons/EyeIcon.vue'
 import ErrorIcon from '@/icons/ErrorIcon.vue'
 import ClosedEyeIcon from '@/icons/ClosedEyeIcon.vue'
@@ -8,10 +8,9 @@ import AppFormError from '@/components/AppFormError.vue'
 
 export default {
   name: 'AppPassword',
-  components: {ClosedEyeIcon, EyeIcon, ErrorIcon, AppFormError},
+  components: { ClosedEyeIcon, EyeIcon, ErrorIcon, AppFormError },
   data() {
     return {
-      id: useId(),
       isShowPassword: false
     }
   },
@@ -47,10 +46,14 @@ export default {
       syncVModel: true,
       validateOnValueUpdate: false
     })
+
+    const id = useId()
+
     return {
       inputValue,
       errorMessage,
-      setErrors
+      setErrors,
+      id
     }
   }
 }
@@ -60,24 +63,24 @@ export default {
   <div class="default-form-group">
     <div class="default-field">
       <input
-          class="default-input form__input"
-          :class="{ error: !!errorMessage, filled: !!inputValue }"
-          :type="isShowPassword ? 'text' : 'password'"
-          :id="id"
-          :name="name"
-          @focus="setErrors(null)"
-          :disabled="disabled"
-          v-model="inputValue"
+        class="default-input form__input"
+        :class="{ error: !!errorMessage, filled: !!inputValue }"
+        :type="isShowPassword ? 'text' : 'password'"
+        :id="id"
+        :name="name"
+        @focus="setErrors(null)"
+        :disabled="disabled"
+        v-model="inputValue"
       />
       <label class="default-label" :for="id">{{ label }}</label>
-      <ErrorIcon v-if="errorMessage" class="default-error-icon"/>
+      <ErrorIcon v-if="errorMessage" class="default-error-icon" />
       <component
-          :is="isShowPassword ? 'ClosedEyeIcon' : 'EyeIcon'"
-          class="form__eye"
-          @click="() => (isShowPassword = !isShowPassword)"
+        :is="isShowPassword ? 'ClosedEyeIcon' : 'EyeIcon'"
+        class="form__eye"
+        @click="() => (isShowPassword = !isShowPassword)"
       />
     </div>
-    <AppFormError v-if="errorMessage" :error-message="errorMessage"/>
+    <AppFormError v-if="errorMessage" :error-message="errorMessage" />
   </div>
 </template>
 

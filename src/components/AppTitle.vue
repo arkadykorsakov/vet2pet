@@ -19,7 +19,7 @@ export default {
       type: String,
       required: false,
       default: 'secondary',
-      validator: (value) => ['primary', 'secondary'].includes(value)
+      validator: (value) => ['primary', 'secondary', 'third'].includes(value)
     }
   }
 }
@@ -47,5 +47,9 @@ export default {
 
 .title.secondary {
   color: var(--secondary);
+}
+
+.title.third {
+  color: var(--secondary-container);
 }
 </style>

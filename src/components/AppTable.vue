@@ -7,10 +7,12 @@ import AppModal from '@/components/AppModal.vue'
 import AppPagination from '@/components/AppPagination.vue'
 import { chunk } from 'lodash'
 import { formatCurrency, formatNumber, formatDateTime } from '@/utils/formatter'
+import IIcon from '@/icons/IIcon.vue'
 
 export default {
   name: 'AppTable',
   components: {
+    IIcon,
     AppPagination,
     AppModal,
     GearWheelIcon,
@@ -24,6 +26,18 @@ export default {
     editable: {
       type: Boolean,
       default: false
+    },
+    detailable: {
+      type: Boolean,
+      default: false
+    },
+    detailUrl: {
+      type: String,
+      default: undefined
+    },
+    detailParam: {
+      type: String,
+      default: undefined
     },
     titleModalEdit: {
       type: String,
@@ -133,6 +147,7 @@ export default {
               </span>
             </th>
             <th v-if="editable"></th>
+            <th v-if="detailable"></th>
           </tr>
         </thead>
         <tbody>
@@ -161,11 +176,14 @@ export default {
               <template v-else-if="col.format === 'time'">
                 {{ formatDateTime(new Date(row[`${col.field}`]), 'time') }}
               </template>
+              <template v-else-if="col.format === 'image'">
+                <img :src="row[`${col.field}`]" alt="" class="image-table" />
+              </template>
               <template v-else>
                 {{ row[`${col.field}`] }}
               </template>
             </td>
-            <td v-if="editable" class="table__edit">
+            <td v-if="editable" class="table__action table__action_edit">
               <div>
                 <button
                   type="button"
@@ -174,6 +192,23 @@ export default {
                 >
                   <GearWheelIcon />
                 </button>
+              </div>
+            </td>
+            <td v-if="detailable" class="table__action">
+              <div>
+                <RouterLink
+                  :to="`${detailUrl}/${row[`${detailParam}`]}`"
+                  custom
+                  v-slot="{ navigate }"
+                >
+                  <button
+                    type="button"
+                    aria-label="В новом окне"
+                    @click="navigate"
+                  >
+                    <IIcon />
+                  </button>
+                </RouterLink>
               </div>
             </td>
           </tr>
@@ -257,12 +292,12 @@ export default {
   padding: 20px 16px 20px 8px;
 }
 
-.table__edit {
+.table__action {
   min-width: 54px;
   width: 54px;
 }
 
-.table__edit div {
+.table__action div {
   height: 100%;
   width: 100%;
   display: flex;
@@ -270,19 +305,22 @@ export default {
   justify-content: center;
 }
 
-.table__edit button {
+.table__action button {
   width: 100%;
   height: 22px;
-  transition: transform 1s ease-in-out;
 }
 
-.table__edit svg {
+.table__action svg {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.table__edit button:hover {
+.table__action_edit button {
+  transition: transform 1s ease-in-out;
+}
+
+.table__action_edit button:hover {
   transform: rotate(90deg);
 }
 
@@ -290,5 +328,14 @@ export default {
   margin-top: 40px;
   display: flex;
   justify-content: center;
+}
+
+.image-table {
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: var(--base-rounded);
+  -moz-border-radius: var(--base-rounded);
+  border-radius: var(--base-rounded);
+  object-fit: cover;
 }
 </style>

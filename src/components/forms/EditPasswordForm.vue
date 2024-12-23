@@ -1,31 +1,31 @@
 <script>
-import {Form} from "vee-validate";
-import AppPassword from "@/components/AppPassword.vue";
-import AppButton from "@/components/AppButton.vue";
-import * as yup from "yup";
-import {markRaw} from "vue";
-import {REQUIRED_MSG} from "@/consts.js";
+import { Form } from 'vee-validate'
+import AppPassword from '@/components/AppPassword.vue'
+import AppButton from '@/components/AppButton.vue'
+import * as yup from 'yup'
+import { markRaw } from 'vue'
+import { REQUIRED_MSG } from '@/consts.js'
 
 export default {
-  name: "EditPasswordForm",
-  components: {AppButton, AppPassword, Form},
+  name: 'EditPasswordForm',
+  components: { AppButton, AppPassword, Form },
   data() {
     const rules = {
       current_password: yup
-          .string()
-          .required(REQUIRED_MSG)
-          .min(6, 'Минимум 6 символов'),
+        .string()
+        .required(REQUIRED_MSG)
+        .min(6, 'Минимум 6 символов'),
       password: yup
-          .string()
-          .required(REQUIRED_MSG)
-          .min(6, 'Минимум 6 символов'),
+        .string()
+        .required(REQUIRED_MSG)
+        .min(6, 'Минимум 6 символов'),
       confirm_password: yup
-          .string()
-          .required(REQUIRED_MSG)
-          .min(6, 'Минимум 6 символов')
-          .oneOf([yup.ref('password')], 'Пароли не совпадают')
+        .string()
+        .required(REQUIRED_MSG)
+        .min(6, 'Минимум 6 символов')
+        .oneOf([yup.ref('password')], 'Пароли не совпадают')
     }
-    const schema = markRaw(yup.object({...rules}))
+    const schema = markRaw(yup.object({ ...rules }))
     return {
       form: null,
       fakeData: {
@@ -35,23 +35,20 @@ export default {
         patronymic: 'Алексеевич',
         date_birth: '1990-05-20',
         city: 'Абакан',
-        phone: '+79029752367',
+        phone: '+79029752367'
       },
       schema
     }
   },
   methods: {
-    async onSubmit(values, {resetForm}) {
+    async onSubmit(values, { resetForm }) {
       console.log(values)
       await new Promise((r) => setTimeout(r, 5000))
       if (values.current_password === '123456') {
-        this.$store.dispatch(
-            'setToast',
-            'Пароль обновлен'
-        )
+        this.$store.dispatch('setToast', 'Пароль обновлен')
         resetForm()
       } else {
-        this.$refs.form.setErrors({current_password: 'Неверный пароль'})
+        this.$refs.form.setErrors({ current_password: 'Неверный пароль' })
       }
     }
   }
@@ -59,15 +56,20 @@ export default {
 </script>
 
 <template>
-  <Form @submit="onSubmit" v-slot="{isSubmitting}" :validation-schema="schema" ref="form">
+  <Form
+    @submit="onSubmit"
+    v-slot="{ isSubmitting }"
+    :validation-schema="schema"
+    ref="form"
+  >
     <div class="form__row">
-      <AppPassword label="Текущий пароль" name="current_password"/>
+      <AppPassword label="Текущий пароль" name="current_password" />
     </div>
     <div class="form__row">
-      <AppPassword label="Новый пароль" name="password"/>
+      <AppPassword label="Новый пароль" name="password" />
     </div>
     <div class="form__row">
-      <AppPassword label="Повторите пароль" name="confirm_password"/>
+      <AppPassword label="Повторите пароль" name="confirm_password" />
     </div>
     <div class="form__button">
       <AppButton type="submit" :disabled="isSubmitting">Сохранить</AppButton>

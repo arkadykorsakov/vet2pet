@@ -10,6 +10,10 @@ export default {
       type: String,
       default: 'Сохранить'
     },
+    labelCancelBtn: {
+      type: String,
+      default: 'Отмена'
+    },
     disabledSubmit: {
       type: Boolean,
       required: true
@@ -23,7 +27,9 @@ export default {
   <div class="form-down">
     <AppDivider class="form-down__divider" />
     <div class="form-down__buttons">
-      <AppButton color="white" @click="$emit('cancel')">Отмена</AppButton>
+      <AppButton color="white" @click="$emit('cancel')">{{
+        labelCancelBtn
+      }}</AppButton>
       <AppButton type="submit" :disabled="disabledSubmit">{{
         labelActionBtn
       }}</AppButton>

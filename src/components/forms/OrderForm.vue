@@ -1,12 +1,12 @@
 <script>
-import {Form} from 'vee-validate'
+import { Form } from 'vee-validate'
 import ModalFormButtons from '@/components/ModalFormButtons.vue'
 import * as yup from 'yup'
-import {REQUIRED_MSG} from '@/consts.js'
+import { REQUIRED_MSG } from '@/consts.js'
 import AppSelect from '@/components/AppSelect.vue'
 import AppTextarea from '@/components/AppTextarea.vue'
 import AppDatePicker from '@/components/AppDatePicker.vue'
-import {markRaw} from 'vue'
+import { markRaw } from 'vue'
 import AppLoading from '@/components/AppLoading.vue'
 
 export default {
@@ -33,9 +33,9 @@ export default {
       symptoms: yup.string().required(REQUIRED_MSG),
       comment: yup.string().required(REQUIRED_MSG),
       date_symptoms: yup
-          .date()
-          .typeError('Невалидная дата')
-          .required(REQUIRED_MSG),
+        .date()
+        .typeError('Невалидная дата')
+        .required(REQUIRED_MSG),
       vet_consultation_type_id: yup.string().required(REQUIRED_MSG),
       vet_id: yup.string().required(REQUIRED_MSG),
       term: yup.date().typeError('Невалидная дата').required(REQUIRED_MSG)
@@ -43,7 +43,7 @@ export default {
     if (this.isEdit) {
       rules['commentChat'] = yup.string().required(REQUIRED_MSG)
     }
-    const schema = markRaw(yup.object({...rules}))
+    const schema = markRaw(yup.object({ ...rules }))
     return {
       schema,
       isLoading: true,
@@ -59,44 +59,44 @@ export default {
         vet_id: undefined
       },
       pets: [
-        {id: 1, name: 'Барсик'},
-        {id: 2, name: 'Мурка'},
-        {id: 3, name: 'Тузик'},
-        {id: 4, name: 'Рекс'},
-        {id: 5, name: 'Белка'}
+        { id: 1, name: 'Барсик' },
+        { id: 2, name: 'Мурка' },
+        { id: 3, name: 'Тузик' },
+        { id: 4, name: 'Рекс' },
+        { id: 5, name: 'Белка' }
       ],
       vetServices: [
-        {id: 1, name: 'Общая консультация'},
-        {id: 2, name: 'Прививка'},
-        {id: 3, name: 'Хирургия'},
-        {id: 4, name: 'Диагностика'},
-        {id: 5, name: 'Стерилизация'}
+        { id: 1, name: 'Общая консультация' },
+        { id: 2, name: 'Прививка' },
+        { id: 3, name: 'Хирургия' },
+        { id: 4, name: 'Диагностика' },
+        { id: 5, name: 'Стерилизация' }
       ],
       consultationTypes: [
-        {id: 1, name: 'Первичная консультация'},
-        {id: 2, name: 'Повторный осмотр'},
-        {id: 3, name: 'Онлайн-консультация'},
-        {id: 4, name: 'Эмердженси'},
-        {id: 5, name: 'Рекомендации после лечения'}
+        { id: 1, name: 'Первичная консультация' },
+        { id: 2, name: 'Повторный осмотр' },
+        { id: 3, name: 'Онлайн-консультация' },
+        { id: 4, name: 'Эмердженси' },
+        { id: 5, name: 'Рекомендации после лечения' }
       ],
       responsibleVets: [
-        {id: 1, fullName: 'Иванов Иван Иванович'},
-        {id: 2, fullName: 'Петрова Ольга Сергеевна'},
-        {id: 3, fullName: 'Сидоров Виктор Петрович'},
-        {id: 4, fullName: 'Кузнецова Мария Владимировна'},
-        {id: 5, fullName: 'Фёдоров Александр Николаевич'}
+        { id: 1, fullName: 'Иванов Иван Иванович' },
+        { id: 2, fullName: 'Петрова Ольга Сергеевна' },
+        { id: 3, fullName: 'Сидоров Виктор Петрович' },
+        { id: 4, fullName: 'Кузнецова Мария Владимировна' },
+        { id: 5, fullName: 'Фёдоров Александр Николаевич' }
       ]
     }
   },
   methods: {
-    async onSubmit(values, {resetForm}) {
+    async onSubmit(values, { resetForm }) {
       await new Promise((r) => setTimeout(r, 5000))
       console.log(values)
       resetForm()
       this.$emit('close')
       this.$store.dispatch(
-          'setToast',
-          this.isEdit ? 'Заказ обновлен' : 'Заказ создан'
+        'setToast',
+        this.isEdit ? 'Заказ обновлен' : 'Заказ создан'
       )
     }
   },
@@ -121,64 +121,64 @@ export default {
 </script>
 
 <template>
-  <AppLoading v-if="isLoading"/>
+  <AppLoading v-if="isLoading" />
   <Form
-      @submit="onSubmit"
-      :validation-schema="schema"
-      v-slot="{ isSubmitting, meta }"
-      :initial-values="initialValues"
-      v-else
+    @submit="onSubmit"
+    :validation-schema="schema"
+    v-slot="{ isSubmitting, meta }"
+    :initial-values="initialValues"
+    v-else
   >
     <div class="form__body">
       <div class="form__row">
         <AppSelect
-            label="Питомец"
-            name="pet_id"
-            :items="pets"
-            item-title="name"
-            item-value="id"
+          label="Питомец"
+          name="pet_id"
+          :items="pets"
+          item-title="name"
+          item-value="id"
         />
         <AppSelect
-            label="Оказываемая услуга"
-            name="vet_service_id"
-            :items="vetServices"
-            item-title="name"
-            item-value="id"
+          label="Оказываемая услуга"
+          name="vet_service_id"
+          :items="vetServices"
+          item-title="name"
+          item-value="id"
         />
       </div>
       <div class="form__row">
         <AppSelect
-            label="Тип консультации"
-            name="vet_consultation_type_id"
-            :items="consultationTypes"
-            item-title="name"
-            item-value="id"
+          label="Тип консультации"
+          name="vet_consultation_type_id"
+          :items="consultationTypes"
+          item-title="name"
+          item-value="id"
         />
-        <AppDatePicker label="Дата симптомов" name="date_symptoms"/>
+        <AppDatePicker label="Дата симптомов" name="date_symptoms" />
       </div>
       <div class="form__row">
-        <AppTextarea label="Комментарий" name="comment"/>
+        <AppTextarea label="Комментарий" name="comment" />
       </div>
       <div class="form__row">
-        <AppTextarea label="Описание симптомов" name="symptoms"/>
+        <AppTextarea label="Описание симптомов" name="symptoms" />
       </div>
       <div class="form__row" v-if="isEdit">
-        <AppTextarea label="Комментарий ChatGPT" name="commentChat"/>
+        <AppTextarea label="Комментарий ChatGPT" name="commentChat" />
       </div>
       <div class="form__row">
         <AppSelect
-            label="Ответственный ветеринар"
-            name="vet_id"
-            :items="responsibleVets"
-            item-title="fullName"
-            item-value="id"
+          label="Ответственный ветеринар"
+          name="vet_id"
+          :items="responsibleVets"
+          item-title="fullName"
+          item-value="id"
         />
-        <AppDatePicker name="term" label="Срок заявки"/>
+        <AppDatePicker name="term" label="Срок заявки" />
       </div>
     </div>
     <ModalFormButtons
-        :disabled-submit="isSubmitting"
-        @cancel="$emit('close')"
+      :disabled-submit="isSubmitting"
+      @cancel="$emit('close')"
     />
   </Form>
 </template>

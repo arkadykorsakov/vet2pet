@@ -212,16 +212,19 @@ export default {
   computed: {
     filteredData() {
       return this.search
-        ? [...this.fakeData].filter((item) =>
-            item.vet_full_name.toLowerCase().includes(this.search.toLowerCase())
+        ? [...this.fakeData].filter(
+            (item) =>
+              item.vet_full_name
+                .toLowerCase()
+                .includes(this.search.toLowerCase()) ||
+              item.pet_type.toLowerCase().includes(this.search.toLowerCase()) ||
+              item.pet_name.toLowerCase().includes(this.search.toLowerCase())
           )
         : [...this.fakeData]
     }
   }
 }
 </script>
-
-<script setup></script>
 
 <template>
   <div class="orders-view">

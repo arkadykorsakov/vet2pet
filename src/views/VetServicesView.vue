@@ -1,11 +1,11 @@
 <script>
 import DashboardHeader from '@/components/DashboardHeader.vue'
 import AppTable from '@/components/AppTable.vue'
-import VetServiceForm from "@/components/forms/VetServiceForm.vue";
+import VetServiceForm from '@/components/forms/VetServiceForm.vue'
 
 export default {
   name: 'VetServices',
-  components: {VetServiceForm, AppTable, DashboardHeader},
+  components: { VetServiceForm, AppTable, DashboardHeader },
   data() {
     return {
       search: '',
@@ -17,7 +17,7 @@ export default {
           align: 'left',
           style: 'width: 20px'
         },
-        {label: 'Услуга', field: 'name', sortable: true, align: 'left'},
+        { label: 'Услуга', field: 'name', sortable: true, align: 'left' },
         {
           label: 'Цена',
           field: 'price',
@@ -46,8 +46,8 @@ export default {
           price: '800',
           created: '2024-06-02'
         },
-        {id: 3, name: 'Чипирование', price: '1500', created: '2024-06-03'},
-        {id: 4, name: 'Удаление клеща', price: '600', created: '2024-06-03'},
+        { id: 3, name: 'Чипирование', price: '1500', created: '2024-06-03' },
+        { id: 4, name: 'Удаление клеща', price: '600', created: '2024-06-03' },
         {
           id: 5,
           name: 'Обработка от паразитов',
@@ -66,7 +66,7 @@ export default {
           price: '4000',
           created: '2024-06-05'
         },
-        {id: 8, name: 'Кастрация кота', price: '3000', created: '2024-06-05'},
+        { id: 8, name: 'Кастрация кота', price: '3000', created: '2024-06-05' },
         {
           id: 9,
           name: 'Чистка зубов ультразвуком',
@@ -127,7 +127,7 @@ export default {
           price: '5000',
           created: '2024-06-15'
         },
-        {id: 19, name: 'Снятие швов', price: '500', created: '2024-06-15'},
+        { id: 19, name: 'Снятие швов', price: '500', created: '2024-06-15' },
         {
           id: 20,
           name: 'Вызов ветеринара на дом',
@@ -140,10 +140,10 @@ export default {
   computed: {
     filteredData() {
       return this.search
-          ? [...this.fakeData].filter((item) =>
-              item.name.toLowerCase().includes(this.search.toLowerCase())
+        ? [...this.fakeData].filter((item) =>
+            item.name.toLowerCase().includes(this.search.toLowerCase())
           )
-          : [...this.fakeData]
+        : [...this.fakeData]
     }
   }
 }
@@ -152,19 +152,24 @@ export default {
 <template>
   <div class="vet-services-view">
     <DashboardHeader
-        title="Ветеринарные услуги"
-        searchable
-        addable
-        @search="(val) => (search = val)"
-        title-modal-add="Добавление услуги"
+      title="Ветеринарные услуги"
+      searchable
+      addable
+      @search="(val) => (search = val)"
+      title-modal-add="Добавление услуги"
     >
-      <template #modal="{close}">
-        <VetServiceForm @close="close"/>
+      <template #modal="{ close }">
+        <VetServiceForm @close="close" />
       </template>
     </DashboardHeader>
-    <AppTable :rows="filteredData" :columns="tableHeaders" editable title-modal-edit="Редактирование услуги">
-      <template #modal="{close}">
-        <VetServiceForm @close="close" is-edit/>
+    <AppTable
+      :rows="filteredData"
+      :columns="tableHeaders"
+      editable
+      title-modal-edit="Редактирование услуги"
+    >
+      <template #modal="{ close }">
+        <VetServiceForm @close="close" is-edit />
       </template>
     </AppTable>
   </div>

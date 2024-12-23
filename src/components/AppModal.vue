@@ -7,7 +7,7 @@ import useFocusTrap from '@/composables/useFocusTrap'
 
 export default {
   name: 'AppModal',
-  components: {ModalFormButtons, TransitionFadeIn, XSecondIcon, AppTitle},
+  components: { ModalFormButtons, TransitionFadeIn, XSecondIcon, AppTitle },
   props: {
     title: {
       type: String,
@@ -22,7 +22,7 @@ export default {
   watch: {
     show() {
       if (this.show) {
-        this.lockBodyScroll();
+        this.lockBodyScroll()
       } else {
         this.unlockBodyScroll()
       }
@@ -38,16 +38,16 @@ export default {
       }
     },
     getScrollbarWidth() {
-      return window.innerWidth - document.documentElement.clientWidth;
+      return window.innerWidth - document.documentElement.clientWidth
     },
     lockBodyScroll() {
-      const scrollbarWidth = this.getScrollbarWidth();
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      document.body.style.overflow = 'hidden';
+      const scrollbarWidth = this.getScrollbarWidth()
+      document.body.style.paddingRight = `${scrollbarWidth}px`
+      document.body.style.overflow = 'hidden'
     },
     unlockBodyScroll() {
-      document.body.style.paddingRight = '';
-      document.body.style.overflow = '';
+      document.body.style.paddingRight = ''
+      document.body.style.overflow = ''
     }
   },
   mounted() {
@@ -58,7 +58,7 @@ export default {
     document.body.style.overflow = null
   },
   setup() {
-    const {trapRef} = useFocusTrap()
+    const { trapRef } = useFocusTrap()
     return {
       trapRef
     }
@@ -71,13 +71,13 @@ export default {
     <div class="modal" v-if="show" @click.self="close">
       <div class="modal__card" ref="trapRef">
         <button class="modal__close" type="button" @click="close">
-          <XSecondIcon/>
+          <XSecondIcon />
         </button>
         <div class="modal__header">
           <AppTitle tag="h2">{{ title }}</AppTitle>
         </div>
         <div class="modal__body">
-          <slot/>
+          <slot />
         </div>
       </div>
     </div>

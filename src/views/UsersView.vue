@@ -1,11 +1,11 @@
 <script>
 import DashboardHeader from '@/components/DashboardHeader.vue'
 import AppTable from '@/components/AppTable.vue'
-import UserForm from "@/components/forms/UserForm.vue";
+import UserForm from '@/components/forms/UserForm.vue'
 
 export default {
   name: 'UsersView',
-  components: {UserForm, AppTable, DashboardHeader},
+  components: { UserForm, AppTable, DashboardHeader },
   data() {
     return {
       search: '',
@@ -17,9 +17,9 @@ export default {
           align: 'left',
           style: 'width: 20px'
         },
-        {label: 'Логин', field: 'email', sortable: true, align: 'left'},
-        {label: 'ФИО', field: 'fullName', sortable: true, align: 'left'},
-        {label: 'Роль', field: 'role', sortable: true, align: 'left'},
+        { label: 'Логин', field: 'email', sortable: true, align: 'left' },
+        { label: 'ФИО', field: 'fullName', sortable: true, align: 'left' },
+        { label: 'Роль', field: 'role', sortable: true, align: 'left' },
         {
           label: 'День рождения',
           field: 'birthday',
@@ -202,10 +202,10 @@ export default {
   computed: {
     filteredData() {
       return this.search
-          ? [...this.fakeData].filter((item) =>
-              item.fullName.toLowerCase().includes(this.search.toLowerCase())
+        ? [...this.fakeData].filter((item) =>
+            item.fullName.toLowerCase().includes(this.search.toLowerCase())
           )
-          : [...this.fakeData]
+        : [...this.fakeData]
     }
   }
 }
@@ -214,20 +214,25 @@ export default {
 <template>
   <div class="users-view">
     <DashboardHeader
-        title="Пользователи"
-        addable
-        searchable
-        add-button-label="Зарегистрировать +"
-        title-modal-add="Регистрация пользователя"
-        @search="(val) => (search = val)"
+      title="Пользователи"
+      addable
+      searchable
+      add-button-label="Зарегистрировать +"
+      title-modal-add="Регистрация пользователя"
+      @search="(val) => (search = val)"
     >
-      <template #modal="{close}">
-        <UserForm @close="close"/>
+      <template #modal="{ close }">
+        <UserForm @close="close" />
       </template>
     </DashboardHeader>
-    <AppTable :rows="fakeData" :columns="tableHeaders" editable title-modal-edit="Редактирование пользователя">
+    <AppTable
+      :rows="fakeData"
+      :columns="tableHeaders"
+      editable
+      title-modal-edit="Редактирование пользователя"
+    >
       <template #modal="{ close }">
-        <UserForm @close="close" is-edit/>
+        <UserForm @close="close" is-edit />
       </template>
     </AppTable>
   </div>

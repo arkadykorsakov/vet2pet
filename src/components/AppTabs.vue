@@ -24,7 +24,7 @@ export default {
   methods: {
     changeTab(activeTab) {
       this.$emit('changeTab', activeTab)
-      this.$router.push({query: {[this.queryName]: activeTab}})
+      this.$router.push({ query: { [this.queryName]: activeTab } })
     }
   }
 }
@@ -35,22 +35,22 @@ export default {
     <ul class="tab-nav">
       <li class="tab-nav__item" v-for="tab in tabs" :key="tab.val">
         <button
-            class="tab-nav__link"
-            :class="{ active: selectedTab === tab.val }"
-            @click="changeTab(tab.val)"
+          class="tab-nav__link"
+          :class="{ active: selectedTab === tab.val }"
+          @click="changeTab(tab.val)"
         >
           {{ tab.label }}
         </button>
       </li>
     </ul>
     <div class="tab-content">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>
 
 <style scoped>
-.tab-nav{
+.tab-nav {
   overflow: auto;
 }
 .tab.version-1 .tab-nav {

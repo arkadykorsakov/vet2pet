@@ -38,7 +38,12 @@ export default {
 <template>
   <div class="register">
     <AppTitle size="lg" class="register__title">Регистрация</AppTitle>
-    <AppTabs :tabs="forms" :selected-tab="activeForm" @change-tab="changeTab" query-name="form">
+    <AppTabs
+      :tabs="forms"
+      :selected-tab="activeForm"
+      @change-tab="changeTab"
+      query-name="form"
+    >
       <div v-if="activeForm === 'client'">
         <KeepAlive>
           <ClientRegisterForm />

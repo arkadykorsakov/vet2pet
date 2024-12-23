@@ -1,16 +1,16 @@
 <script>
-import AppLoading from "@/components/AppLoading.vue";
-import ModalFormButtons from "@/components/ModalFormButtons.vue";
-import * as yup from "yup";
-import {REQUIRED_MSG} from "@/consts.js";
-import {markRaw} from "vue";
-import {Form} from 'vee-validate'
-import AppInput from "@/components/AppInput.vue";
-import AppSelect from "@/components/AppSelect.vue";
+import AppLoading from '@/components/AppLoading.vue'
+import ModalFormButtons from '@/components/ModalFormButtons.vue'
+import * as yup from 'yup'
+import { REQUIRED_MSG } from '@/consts.js'
+import { markRaw } from 'vue'
+import { Form } from 'vee-validate'
+import AppInput from '@/components/AppInput.vue'
+import AppSelect from '@/components/AppSelect.vue'
 
 export default {
-  name: "VetServiceForm",
-  components: {AppSelect, AppInput, ModalFormButtons, AppLoading, Form},
+  name: 'VetServiceForm',
+  components: { AppSelect, AppInput, ModalFormButtons, AppLoading, Form },
   props: {
     isEdit: {
       type: Boolean,
@@ -22,30 +22,33 @@ export default {
     const rules = {
       name: yup.string().required(REQUIRED_MSG),
       price: yup.number().typeError('Невалидное число').required(REQUIRED_MSG),
-      specialization_id: yup.string().required(REQUIRED_MSG),
+      specialization_id: yup.string().required(REQUIRED_MSG)
     }
-    const schema = markRaw(yup.object({...rules}))
+    const schema = markRaw(yup.object({ ...rules }))
     return {
       isLoading: true,
       initialValues: {},
       schema,
       specializations: [
-        {"id": 1, "name": "Ветеринар-паразитолог"},
-        {"id": 2, "name": "Ветеринар-диетолог"},
-        {"id": 3, "name": "Ветеринар-реаниматолог"},
-        {"id": 4, "name": "Ветеринар-уролог"},
-        {"id": 5, "name": "Ветеринар-эксперт"}]
+        { id: 1, name: 'Ветеринар-паразитолог' },
+        { id: 2, name: 'Ветеринар-диетолог' },
+        { id: 3, name: 'Ветеринар-реаниматолог' },
+        { id: 4, name: 'Ветеринар-уролог' },
+        { id: 5, name: 'Ветеринар-эксперт' }
+      ]
     }
   },
   methods: {
-    async onSubmit(values, {resetForm}) {
+    async onSubmit(values, { resetForm }) {
       await new Promise((r) => setTimeout(r, 5000))
       console.log(values)
       resetForm()
       this.$emit('close')
       this.$store.dispatch(
-          'setToast',
-          this.isEdit ? 'Ветеринарная услуга обновлена' : 'Ветеринарная услуга создана'
+        'setToast',
+        this.isEdit
+          ? 'Ветеринарная услуга обновлена'
+          : 'Ветеринарная услуга создана'
       )
     }
   },
@@ -64,26 +67,32 @@ export default {
 </script>
 
 <template>
-  <AppLoading v-if="isLoading"/>
+  <AppLoading v-if="isLoading" />
   <Form
-      @submit="onSubmit"
-      :validation-schema="schema"
-      v-slot="{ isSubmitting, meta}"
-      :initial-values="initialValues"
-      v-else>
+    @submit="onSubmit"
+    :validation-schema="schema"
+    v-slot="{ isSubmitting, meta }"
+    :initial-values="initialValues"
+    v-else
+  >
     <div class="form__body">
       <div class="form__row">
-        <AppInput label="Наименование" name="name"/>
+        <AppInput label="Наименование" name="name" />
       </div>
       <div class="form__row">
-        <AppInput label="Стоимость" name="price" type="number" :step="0.01"/>
-        <AppSelect item-title="name" item-value="id" label="Подходящая специализация" name="specialization_id"
-                   :items="specializations"/>
+        <AppInput label="Стоимость" name="price" type="number" :step="0.01" />
+        <AppSelect
+          item-title="name"
+          item-value="id"
+          label="Подходящая специализация"
+          name="specialization_id"
+          :items="specializations"
+        />
       </div>
     </div>
     <ModalFormButtons
-        :disabled-submit="isSubmitting || !meta.valid"
-        @cancel="$emit('close')"
+      :disabled-submit="isSubmitting || !meta.valid"
+      @cancel="$emit('close')"
     />
   </Form>
 </template>

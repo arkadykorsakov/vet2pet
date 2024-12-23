@@ -1,12 +1,12 @@
 <script>
-import AppTitle from "@/components/AppTitle.vue";
-import AppTabs from "@/components/AppTabs.vue";
-import EditProfilePage from "@/components/pages/EditProfilePage.vue";
-import EditPasswordForm from "@/components/forms/EditPasswordForm.vue";
+import AppTitle from '@/components/AppTitle.vue'
+import AppTabs from '@/components/AppTabs.vue'
+import EditProfilePage from '@/components/pages/EditProfilePage.vue'
+import EditPasswordForm from '@/components/forms/EditPasswordForm.vue'
 
 export default {
   name: 'SettingsView',
-  components: {EditPasswordForm, EditProfilePage, AppTabs, AppTitle},
+  components: { EditPasswordForm, EditProfilePage, AppTabs, AppTitle },
   data() {
     return {
       activePage: this.$route?.query?.page || 'contacts',
@@ -32,15 +32,19 @@ export default {
 
 <template>
   <div class="settings-view">
-    <AppTitle class="settings-view__title">
-      Настройки
-    </AppTitle>
-    <AppTabs :tabs="pages" :selected-tab="activePage" @change-tab="changeTab" query-name="page" :version="2">
+    <AppTitle class="settings-view__title"> Настройки </AppTitle>
+    <AppTabs
+      :tabs="pages"
+      :selected-tab="activePage"
+      @change-tab="changeTab"
+      query-name="page"
+      :version="2"
+    >
       <div v-if="activePage === 'contacts'">
-        <EditProfilePage/>
+        <EditProfilePage />
       </div>
       <div v-if="activePage === 'password'" class="password-page">
-        <EditPasswordForm class="password-page__form"/>
+        <EditPasswordForm class="password-page__form" />
       </div>
     </AppTabs>
   </div>

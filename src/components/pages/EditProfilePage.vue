@@ -1,14 +1,21 @@
 <script>
-import AppEditButton from "@/components/AppEditButton.vue";
-import {Form} from "vee-validate";
-import AppInput from "@/components/AppInput.vue";
-import AppDatePicker from "@/components/AppDatePicker.vue";
-import AppModal from "@/components/AppModal.vue";
-import EditContactsForm from "@/components/forms/EditContactsForm.vue";
+import AppEditButton from '@/components/AppEditButton.vue'
+import { Form } from 'vee-validate'
+import AppInput from '@/components/AppInput.vue'
+import AppDatePicker from '@/components/AppDatePicker.vue'
+import AppModal from '@/components/AppModal.vue'
+import EditContactsForm from '@/components/forms/EditContactsForm.vue'
 
 export default {
-  name: "EditProfilePage",
-  components: {EditContactsForm, AppModal, AppDatePicker, AppInput, Form, AppEditButton},
+  name: 'EditProfilePage',
+  components: {
+    EditContactsForm,
+    AppModal,
+    AppDatePicker,
+    AppInput,
+    Form,
+    AppEditButton
+  },
   data() {
     return {
       fakeData: {
@@ -18,9 +25,9 @@ export default {
         patronymic: 'Алексеевич',
         date_birth: '1990-05-20',
         city: 'Абакан',
-        phone: '+79029752367',
+        phone: '+79029752367'
       },
-      show: false,
+      show: false
     }
   }
 }
@@ -29,21 +36,25 @@ export default {
 <template>
   <Form :initial-values="fakeData">
     <div class="form__row">
-      <AppInput label="Фамилия" name="surname" disabled/>
-      <AppInput label="Имя" name="name" disabled/>
-      <AppInput label="Отчество" name="patronymic" disabled/>
+      <AppInput label="Фамилия" name="surname" disabled />
+      <AppInput label="Имя" name="name" disabled />
+      <AppInput label="Отчество" name="patronymic" disabled />
     </div>
     <div class="form__row">
-      <AppInput label="Город" name="city" disabled/>
-      <AppInput label="Номер" name="phone" disabled/>
-      <AppDatePicker label="Дата рождения" name="date_birth" disabled/>
+      <AppInput label="Город" name="city" disabled />
+      <AppInput label="Номер" name="phone" disabled />
+      <AppDatePicker label="Дата рождения" name="date_birth" disabled />
     </div>
     <div class="form__button">
-      <AppEditButton @click="show = true"/>
+      <AppEditButton @click="show = true" />
     </div>
     <Teleport to="body">
-      <AppModal title="Редактирование контактной информации" :show="show" @close="show = false">
-        <EditContactsForm @close="show = false"/>
+      <AppModal
+        title="Редактирование контактной информации"
+        :show="show"
+        @close="show = false"
+      >
+        <EditContactsForm @close="show = false" />
       </AppModal>
     </Teleport>
   </Form>
