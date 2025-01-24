@@ -1,0 +1,131 @@
+.default-form-group {
+  width: 100%;
+}
+
+.default-form-group:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.default-field {
+  position: relative;
+  width: 100%;
+}
+
+.default-input {
+  display: block;
+  width: 100%;
+  background: var(--surface-bright);
+  border: 2px solid transparent;
+  border-radius: var(--base-rounded);
+  padding: 16px 40px 16px 16px;
+  font-family: var(--main-font), sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--surface-tint);
+  min-height: 60px;
+  transition: all 0.3s ease;
+}
+
+.default-input:disabled {
+  background-color: rgba(29, 27, 32, 0.12) !important;
+  color: var(--on-surface) !important;
+  cursor: not-allowed !important;
+}
+
+.default-input:focus {
+  outline: none;
+  border: 2px solid var(--surface-tint);
+}
+
+.default-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 12px;
+  -webkit-border-radius: var(--base-rounded);
+  -moz-border-radius: var(--base-rounded);
+  border-radius: var(--base-rounded);
+  padding: 0 4px;
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: text;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.default-input:focus + .default-label,
+.default-input.filled + .default-label,
+input.default-input:-webkit-autofill + .default-label {
+  background: var(--on-primary);
+  top: -8px;
+  font-size: 12px;
+  transform: translateY(0);
+  -webkit-line-clamp: 1;
+  max-width: calc(100% - 24px);
+}
+
+.default-input.error {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.default-input.error + .default-label {
+  color: var(--danger);
+}
+
+.default-error-icon {
+  position: absolute;
+  right: 12px;
+  top: 16px;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  display: none;
+}
+
+.form__row_cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.form__row_cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.form__row:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+@media (max-width: 767.98px) {
+  .form__row_cols-2 {
+    gap: 12px;
+  }
+
+  .form__row_cols-3 {
+    gap: 0 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form__row:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .form__row_cols-2,
+  .form__row_cols-3 {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0;
+  }
+}
