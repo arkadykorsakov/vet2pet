@@ -148,101 +148,106 @@ export default {
     />
     <div class="pet-view__data">
       <Form :initial-values="initialData" class="pet-view__content">
-        <div>
-          <div class="form__row form__row_cols-3 pet-view__row">
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Пол"
-              name="gender"
-              :items="genders"
-              disabled
-            />
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Вид"
-              name="pet_type"
-              :items="petTypes"
-              disabled
-            />
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Порода"
-              name="pet_breed"
-              :items="petBreeds"
-              disabled
-            />
-          </div>
-          <div class="form__row form__row_cols-3 pet-view__row">
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Происхождение"
-              name="pet_origin"
-              :items="petOrigins"
-              disabled
-            />
-            <AppInput
-              label="Вес"
-              name="weight"
-              type="number"
-              :step="0.001"
-              disabled
-            />
-            <AppSelect
-              item-title="name"
-              item-value="value"
-              label="Стерилизация"
-              name="stylization"
-              :items="[
-                { name: 'Да', value: 'Да' },
-                { name: 'Нет', value: 'Нет' }
-              ]"
-              disabled
-            />
-          </div>
-          <div class="form__row form__row_cols-2 pet-view__row">
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Место содержания"
-              name="place_conditions"
-              :items="placeConditions"
-              disabled
-            />
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Условия содержания"
-              name="detention_condition"
-              :items="detentionConditions"
-              disabled
-            />
-          </div>
-          <div class="form__row form__row_cols-2 pet-view__row">
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Питание"
-              name="pet_nutrition"
-              :items="petNutrition"
-              disabled
-            />
-            <AppSelect
-              item-title="name"
-              item-value="id"
-              label="Бренд корма"
-              name="food_brand"
-              :items="foodBrands"
-              disabled
-            />
-          </div>
-          <div class="form__row form__row_cols-2 pet-view__row">
-            <AppInput label="Номер чипа" name="chip" disabled />
-            <AppDatePicker label="Дата рождения" name="date_birth" disabled />
-          </div>
+        <div class="form__body">
+          <AppSelect
+            class="cols-2"
+            item-title="name"
+            item-value="id"
+            label="Пол"
+            name="gender"
+            :items="genders"
+            disabled
+          />
+          <AppSelect
+            class="cols-2"
+            item-title="name"
+            item-value="id"
+            label="Вид"
+            name="pet_type"
+            :items="petTypes"
+            disabled
+          />
+          <AppSelect
+            class="cols-2"
+            item-title="name"
+            item-value="id"
+            label="Порода"
+            name="pet_breed"
+            :items="petBreeds"
+            disabled
+          />
+          <AppSelect
+            class="cols-2"
+            item-title="name"
+            item-value="id"
+            label="Происхождение"
+            name="pet_origin"
+            :items="petOrigins"
+            disabled
+          />
+          <AppInput
+            class="cols-2"
+            label="Вес"
+            name="weight"
+            type="number"
+            :step="0.001"
+            disabled
+          />
+          <AppSelect
+            class="cols-2"
+            item-title="name"
+            item-value="value"
+            label="Стерилизация"
+            name="stylization"
+            :items="[
+              { name: 'Да', value: 'Да' },
+              { name: 'Нет', value: 'Нет' }
+            ]"
+            disabled
+          />
+          <AppSelect
+            class="cols-3"
+            item-title="name"
+            item-value="id"
+            label="Место содержания"
+            name="place_conditions"
+            :items="placeConditions"
+            disabled
+          />
+          <AppSelect
+            class="cols-3"
+            item-title="name"
+            item-value="id"
+            label="Условия содержания"
+            name="detention_condition"
+            :items="detentionConditions"
+            disabled
+          />
+          <AppSelect
+            class="cols-3"
+            item-title="name"
+            item-value="id"
+            label="Питание"
+            name="pet_nutrition"
+            :items="petNutrition"
+            disabled
+          />
+          <AppSelect
+            class="cols-3"
+            item-title="name"
+            item-value="id"
+            label="Бренд корма"
+            name="food_brand"
+            :items="foodBrands"
+            disabled
+          />
+          <AppInput label="Номер чипа" name="chip" disabled class="cols-3" />
+          <AppDatePicker
+            label="Дата рождения"
+            name="date_birth"
+            disabled
+            class="cols-3"
+          />
         </div>
         <div class="pet-view__edit">
           <AppDatePicker
@@ -284,14 +289,6 @@ export default {
   gap: 16px;
 }
 
-.pet-view__row {
-  gap: 12px;
-}
-
-.pet-view__row:not(:last-child) {
-  margin-bottom: 20px;
-}
-
 .pet-view__edit {
   margin-top: 40px;
   display: flex;
@@ -305,9 +302,31 @@ export default {
   max-width: 200px;
 }
 
+.form__body {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.cols-2 {
+  grid-column: span 2;
+}
+
+.cols-3 {
+  grid-column: span 3;
+}
+
 @media (max-width: 1200px) {
   .pet-view__data {
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 575.98px) {
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 }
 </style>

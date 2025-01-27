@@ -87,7 +87,7 @@ export default {
   },
   async mounted() {
     if (this.isEdit) {
-      await new Promise((r) => setTimeout(r, 5000))
+      await new Promise((r) => setTimeout(r, 500))
       this.initialValues = {
         surname: 'Иванов',
         name: 'Иван',
@@ -117,12 +117,10 @@ export default {
   >
     <div class="form__start">
       <AppTitle class="form__subtitle">Основные параметры</AppTitle>
-      <div class="form__row">
+      <div class="form__body">
         <AppInput label="Фамилия" name="surname" />
         <AppInput label="Имя" name="name" />
         <AppInput label="Отчество" name="patronymic" />
-      </div>
-      <div class="form__row">
         <AppInput label="Город фактического пребывания" name="city" />
         <AppInput label="Телефон" name="phone" />
         <AppDatePicker label="Дата Рождения" name="date_birth" />
@@ -130,7 +128,7 @@ export default {
     </div>
     <div class="form__end">
       <AppTitle class="form__subtitle">Данные для входа</AppTitle>
-      <div class="form__row">
+      <div class="form__body">
         <AppInput label="Email" name="email" type="email" />
         <AppSelect
           item-title="name"
@@ -139,12 +137,12 @@ export default {
           name="role_id"
           :items="roles"
         />
-      </div>
-      <div class="form__row">
-        <AppPassword name="password" label="Пароль" />
-      </div>
-      <div class="form__row">
-        <AppPassword name="confirm_password" label="Повторите Пароль" />
+        <AppPassword name="password" label="Пароль" class="cols-2" />
+        <AppPassword
+          name="confirm_password"
+          label="Повторите Пароль"
+          class="cols-2"
+        />
       </div>
     </div>
     <ModalFormButtons :disabled-submit="isSubmitting || !meta.valid" />
@@ -158,5 +156,30 @@ export default {
 
 .form__subtitle {
   margin-bottom: 32px;
+}
+
+.form__start .form__body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.form__end .form__body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cols-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 575.98px) {
+  .form__start .form__body,
+  .form__end .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 </style>

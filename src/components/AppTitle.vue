@@ -33,8 +33,7 @@ export default {
 
 <style scoped>
 .title {
-  word-wrap: break-word;
-  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .title.md {

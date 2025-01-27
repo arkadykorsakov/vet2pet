@@ -62,13 +62,9 @@ export default {
     :validation-schema="schema"
     ref="form"
   >
-    <div class="form__row">
+    <div class="form__body">
       <AppPassword label="Текущий пароль" name="current_password" />
-    </div>
-    <div class="form__row">
       <AppPassword label="Новый пароль" name="password" />
-    </div>
-    <div class="form__row">
       <AppPassword label="Повторите пароль" name="confirm_password" />
     </div>
     <div class="form__button">
@@ -81,5 +77,12 @@ export default {
 .form__button {
   display: flex;
   justify-content: flex-end;
+}
+
+.form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 </style>

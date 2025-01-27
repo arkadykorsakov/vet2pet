@@ -102,7 +102,7 @@ export default {
   },
   async mounted() {
     if (this.isEdit) {
-      await new Promise((r) => setTimeout(r, 5000))
+      await new Promise((r) => setTimeout(r, 500))
       this.initialValues = {
         pet_id: 1,
         vet_service_id: 3,
@@ -130,53 +130,47 @@ export default {
     v-else
   >
     <div class="form__body">
-      <div class="form__row form__row_cols-2">
-        <AppSelect
-          label="Питомец"
-          name="pet_id"
-          :items="pets"
-          item-title="name"
-          item-value="id"
-          class="form__group"
-        />
-        <AppSelect
-          label="Оказываемая услуга"
-          name="vet_service_id"
-          :items="vetServices"
-          item-title="name"
-          item-value="id"
-          class="form__group"
-        />
-      </div>
-      <div class="form__row form__row_cols-2">
-        <AppSelect
-          label="Тип консультации"
-          name="vet_consultation_type_id"
-          :items="consultationTypes"
-          item-title="name"
-          item-value="id"
-        />
-        <AppDatePicker label="Дата симптомов" name="date_symptoms" />
-      </div>
-      <div class="form__row">
-        <AppTextarea label="Комментарий" name="comment" />
-      </div>
-      <div class="form__row">
-        <AppTextarea label="Описание симптомов" name="symptoms" />
-      </div>
-      <div class="form__row" v-if="isEdit">
-        <AppTextarea label="Комментарий ChatGPT" name="commentChat" />
-      </div>
-      <div class="form__row form__row_cols-2">
-        <AppSelect
-          label="Ответственный ветеринар"
-          name="vet_id"
-          :items="responsibleVets"
-          item-title="fullName"
-          item-value="id"
-        />
-        <AppDatePicker name="term" label="Срок заявки" />
-      </div>
+      <AppSelect
+        label="Питомец"
+        name="pet_id"
+        :items="pets"
+        item-title="name"
+        item-value="id"
+        class="form__group"
+      />
+      <AppSelect
+        label="Оказываемая услуга"
+        name="vet_service_id"
+        :items="vetServices"
+        item-title="name"
+        item-value="id"
+        class="form__group"
+      />
+
+      <AppSelect
+        label="Тип консультации"
+        name="vet_consultation_type_id"
+        :items="consultationTypes"
+        item-title="name"
+        item-value="id"
+      />
+      <AppDatePicker label="Дата симптомов" name="date_symptoms" />
+      <AppTextarea label="Комментарий" name="comment" class="cols-2" />
+      <AppTextarea label="Описание симптомов" name="symptoms" class="cols-2" />
+      <AppTextarea
+        label="Комментарий ChatGPT"
+        name="commentChat"
+        class="cols-2"
+        v-if="isEdit"
+      />
+      <AppSelect
+        label="Ответственный ветеринар"
+        name="vet_id"
+        :items="responsibleVets"
+        item-title="fullName"
+        item-value="id"
+      />
+      <AppDatePicker name="term" label="Срок заявки" />
     </div>
     <ModalFormButtons
       :disabled-submit="isSubmitting"
@@ -184,3 +178,23 @@ export default {
     />
   </Form>
 </template>
+
+<style scoped>
+.form__body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cols-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 575.98px) {
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+</style>

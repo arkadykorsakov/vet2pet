@@ -200,13 +200,14 @@ export default {
     :initial-values="initialData"
     v-else
   >
-    <div class="form__row form__row_cols-3">
+    <div class="form__body">
       <AppSelect
         item-title="name"
         item-value="id"
         label="Пол"
         name="gender"
         :items="genders"
+        class="cols-2"
       />
       <AppSelect
         item-title="name"
@@ -214,6 +215,7 @@ export default {
         label="Вид"
         name="pet_type"
         :items="petTypes"
+        class="cols-2"
       />
       <AppSelect
         item-title="name"
@@ -221,17 +223,23 @@ export default {
         label="Порода"
         name="pet_breed"
         :items="petBreeds"
+        class="cols-2"
       />
-    </div>
-    <div class="form__row form__row_cols-3">
       <AppSelect
         item-title="name"
         item-value="id"
         label="Происхождение"
         name="pet_origin"
         :items="petOrigins"
+        class="cols-2"
       />
-      <AppInput label="Вес" name="weight" type="number" :step="0.001" />
+      <AppInput
+        label="Вес"
+        name="weight"
+        type="number"
+        :step="0.001"
+        class="cols-2"
+      />
       <AppSelect
         item-title="name"
         item-value="value"
@@ -241,15 +249,15 @@ export default {
           { name: 'Да', value: 'Да' },
           { name: 'Нет', value: 'Нет' }
         ]"
+        class="cols-2"
       />
-    </div>
-    <div class="form__row form__row_cols-2">
       <AppSelect
         item-title="name"
         item-value="id"
         label="Место содержания"
         name="place_conditions"
         :items="placeConditions"
+        class="cols-3"
       />
       <AppSelect
         item-title="name"
@@ -257,15 +265,15 @@ export default {
         label="Условия содержания"
         name="detention_condition"
         :items="detentionConditions"
+        class="cols-3"
       />
-    </div>
-    <div class="form__row form__row_cols-2">
       <AppSelect
         item-title="name"
         item-value="id"
         label="Питание"
         name="pet_nutrition"
         :items="petNutrition"
+        class="cols-3"
       />
       <AppSelect
         item-title="name"
@@ -273,11 +281,10 @@ export default {
         label="Бренд корма"
         name="food_brand"
         :items="foodBrands"
+        class="cols-3"
       />
-    </div>
-    <div class="form__row form__row_cols-2">
-      <AppInput label="Номер чипа" name="chip" />
-      <AppDatePicker label="Дата рождения" name="date_birth" />
+      <AppInput label="Номер чипа" name="chip" class="cols-3" />
+      <AppDatePicker label="Дата рождения" name="date_birth" class="cols-3" />
     </div>
     <AppMultipleUploadImage label="Фото питомца" name="photos" />
     <ModalFormButtons
@@ -287,3 +294,28 @@ export default {
     />
   </Form>
 </template>
+
+<style scoped>
+.form__body {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.cols-2 {
+  grid-column: span 2;
+}
+
+.cols-3 {
+  grid-column: span 3;
+}
+
+@media (max-width: 575.98px) {
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+</style>

@@ -70,13 +70,10 @@ export default {
     :validation-schema="schema"
     :initial-values="initialData"
     v-else
+    class="form__body"
   >
-    <div class="form__row">
-      <AppInput label="Название" name="name" />
-    </div>
-    <div class="form__row">
-      <AppUploadImage label="Иконка" name="file" />
-    </div>
+    <AppInput label="Название" name="name" />
+    <AppUploadImage label="Иконка" name="file" />
     <ModalFormButtons
       :disabled-submit="isSubmitting"
       @cancel="isEdit ? $emit('close') : $emit('cancel')"
@@ -84,3 +81,11 @@ export default {
     />
   </Form>
 </template>
+
+<style scoped>
+.form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+</style>

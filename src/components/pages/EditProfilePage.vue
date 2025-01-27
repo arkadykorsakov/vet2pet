@@ -35,12 +35,10 @@ export default {
 
 <template>
   <Form :initial-values="fakeData">
-    <div class="form__row form__row_cols-3">
+    <div class="form__body">
       <AppInput label="Фамилия" name="surname" disabled />
       <AppInput label="Имя" name="name" disabled />
       <AppInput label="Отчество" name="patronymic" disabled />
-    </div>
-    <div class="form__row form__row_cols-3">
       <AppInput label="Город" name="city" disabled />
       <AppInput label="Номер" name="phone" disabled />
       <AppDatePicker label="Дата рождения" name="date_birth" disabled />
@@ -64,5 +62,19 @@ export default {
 .form__button {
   display: flex;
   justify-content: flex-end;
+}
+.form__body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 575.98px) {
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 </style>

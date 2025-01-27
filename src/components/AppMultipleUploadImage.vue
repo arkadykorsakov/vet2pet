@@ -116,6 +116,26 @@ export default {
 <template>
   <div class="upload-file">
     <div class="upload-file__group">
+      <div>
+        <button
+          type="button"
+          aria-label="Загрузить фотографии"
+          class="upload-file__btn"
+          @click="() => $refs.inputEl?.click()"
+        >
+          <CameraIcon />
+        </button>
+        <input
+          type="file"
+          :id="id"
+          :name="name"
+          @change="uploadFiles"
+          multiple
+          ref="inputEl"
+          class="visually-hidden"
+        />
+        <label :for="id" class="visually-hidden">{{ label }}</label>
+      </div>
       <div v-for="(src, idx) in sources" :key="idx" class="upload-file__file">
         <img :src="src" alt="Фотографии" class="upload-file__img" />
         <button
@@ -127,24 +147,6 @@ export default {
           <XThirdIcon />
         </button>
       </div>
-      <button
-        type="button"
-        aria-label="Загрузить фотографии"
-        class="upload-file__btn"
-        @click="() => $refs.inputEl?.click()"
-      >
-        <CameraIcon />
-      </button>
-      <input
-        type="file"
-        :id="id"
-        :name="name"
-        @change="uploadFiles"
-        multiple
-        ref="inputEl"
-        class="visually-hidden"
-      />
-      <label :for="id" class="visually-hidden">{{ label }}</label>
     </div>
     <AppFormError :error-message="errorMessage" v-if="errorMessage" />
   </div>
@@ -153,15 +155,15 @@ export default {
 <style scoped>
 .upload-file__group {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .upload-file__group img {
   display: block;
   height: 91px;
-  width: 100%;
+  width: 68px;
   object-fit: cover;
   border-radius: var(--base-rounded);
 }
@@ -173,7 +175,7 @@ export default {
   height: 91px;
   background: var(--surface-bright);
   border-radius: var(--base-rounded);
-  width: 100%;
+  width: 68px;
 }
 
 .upload-file__file {
@@ -184,23 +186,5 @@ export default {
   position: absolute;
   right: -8px;
   top: -8px;
-}
-
-@media (max-width: 767.98px) {
-  .upload-file__group {
-    grid-template-columns: repeat(7, 1fr);
-  }
-}
-
-@media (max-width: 575.98px) {
-  .upload-file__group {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-@media (max-width: 390.98px) {
-  .upload-file__group {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 </style>

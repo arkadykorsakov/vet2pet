@@ -58,12 +58,10 @@ export default {
     @submit="onSubmit"
     :validation-schema="schema"
   >
-    <div class="form__row form__row_cols-3">
+    <div class="form__body">
       <AppInput label="Фамилия" name="surname" />
       <AppInput label="Имя" name="name" />
       <AppInput label="Отчество" name="patronymic" />
-    </div>
-    <div class="form__row form__row_cols-3">
       <AppInput label="Город" name="city" />
       <AppInput label="Номер" name="phone" />
       <AppDatePicker label="Дата рождения" name="date_birth" />
@@ -71,3 +69,19 @@ export default {
     <ModalFormButtons :disabled-submit="isSubmitting" @close="$emit('close')" />
   </Form>
 </template>
+
+<style scoped>
+.form__body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 575.98px) {
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+</style>

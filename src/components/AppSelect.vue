@@ -152,7 +152,6 @@ export default {
 .form__label {
   cursor: pointer;
   text-align: left;
-  max-width: 150px;
 }
 
 .select-items {

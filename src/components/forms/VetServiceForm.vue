@@ -54,7 +54,7 @@ export default {
   },
   async mounted() {
     if (this.isEdit) {
-      await new Promise((r) => setTimeout(r, 5000))
+      await new Promise((r) => setTimeout(r, 500))
       this.initialValues = {
         name: 'Вакцинация домашних животных',
         specialization_id: 1,
@@ -76,19 +76,15 @@ export default {
     v-else
   >
     <div class="form__body">
-      <div class="form__row">
-        <AppInput label="Наименование" name="name" />
-      </div>
-      <div class="form__row">
-        <AppInput label="Стоимость" name="price" type="number" :step="0.01" />
-        <AppSelect
-          item-title="name"
-          item-value="id"
-          label="Подходящая специализация"
-          name="specialization_id"
-          :items="specializations"
-        />
-      </div>
+      <AppInput label="Наименование" name="name" class="cols-2" />
+      <AppInput label="Стоимость" name="price" type="number" :step="0.01" />
+      <AppSelect
+        item-title="name"
+        item-value="id"
+        label="Подходящая специализация"
+        name="specialization_id"
+        :items="specializations"
+      />
     </div>
     <ModalFormButtons
       :disabled-submit="isSubmitting || !meta.valid"
@@ -96,3 +92,23 @@ export default {
     />
   </Form>
 </template>
+
+<style scoped>
+.form__body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.cols-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 575.98px) {
+  .form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+</style>

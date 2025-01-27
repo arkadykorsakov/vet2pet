@@ -352,4 +352,10 @@ export default {
   border-radius: var(--base-rounded);
   object-fit: cover;
 }
+
+@media (max-width: 991.98px) {
+  .table {
+    min-width: min-content;
+  }
+}
 </style>

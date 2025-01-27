@@ -60,9 +60,7 @@ export default {
     :validation-schema="schema"
     :initial-values="initialData"
   >
-    <div class="form__row">
-      <AppInput label="Название" name="name" />
-    </div>
+    <AppInput label="Название" name="name" />
     <ModalFormButtons
       :disabled-submit="isSubmitting"
       @cancel="isEdit ? $emit('close') : $emit('cancel')"
