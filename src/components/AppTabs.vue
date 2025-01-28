@@ -141,4 +141,10 @@ export default {
 .tab.version-2 .tab-nav__item:not(:last-child) {
   margin-right: 2px;
 }
+
+@media (max-width: 767.98px) {
+  .tab.version-2 .tab-nav {
+    margin-bottom: 26px;
+  }
+}
 </style>

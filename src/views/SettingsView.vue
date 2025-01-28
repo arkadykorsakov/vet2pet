@@ -72,4 +72,10 @@ export default {
     padding: 0;
   }
 }
+
+@media (max-width: 767.98px) {
+  .settings-view__title {
+    margin-bottom: 26px;
+  }
+}
 </style>

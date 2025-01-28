@@ -93,4 +93,10 @@ export default {
 .dashboard-controls:not(:last-child) {
   margin-bottom: 46px;
 }
+
+@media (max-width: 767.98px) {
+  .dashboard-controls:not(:last-child) {
+    margin-bottom: 26px;
+  }
+}
 </style>

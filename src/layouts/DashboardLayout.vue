@@ -95,4 +95,9 @@ export default {
     pointer-events: all;
   }
 }
+@media (max-width: 991.98px) {
+  .main {
+    padding: 134px 20px 44px;
+  }
+}
 </style>
