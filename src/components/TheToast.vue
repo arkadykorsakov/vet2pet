@@ -45,4 +45,12 @@ export default {
   width: 40px;
   height: 40px;
 }
+
+@media (max-width: 575.98px) {
+  .toast {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 </style>

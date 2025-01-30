@@ -357,5 +357,9 @@ export default {
   .table {
     min-width: min-content;
   }
+  td,
+  th {
+    white-space: nowrap;
+  }
 }
 </style>
