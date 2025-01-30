@@ -125,7 +125,7 @@ export default {
   <Form
     @submit="onSubmit"
     :validation-schema="schema"
-    v-slot="{ isSubmitting, meta }"
+    v-slot="{ isSubmitting }"
     :initial-values="initialValues"
     v-else
   >

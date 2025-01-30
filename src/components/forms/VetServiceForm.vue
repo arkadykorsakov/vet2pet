@@ -71,7 +71,7 @@ export default {
   <Form
     @submit="onSubmit"
     :validation-schema="schema"
-    v-slot="{ isSubmitting, meta }"
+    v-slot="{ isSubmitting }"
     :initial-values="initialValues"
     v-else
   >
@@ -87,7 +87,7 @@ export default {
       />
     </div>
     <ModalFormButtons
-      :disabled-submit="isSubmitting || !meta.valid"
+      :disabled-submit="isSubmitting"
       @cancel="$emit('close')"
     />
   </Form>
