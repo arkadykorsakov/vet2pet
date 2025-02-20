@@ -39,16 +39,15 @@ export default {
     :validation-schema="schema"
     keep-values
     v-slot="{ isSubmitting }"
+    class="login-form"
   >
-    <div>
-      <AppInput
-        label="Email"
-        name="email"
-        type="email"
-        class="default-form-group"
-      />
-      <AppPassword label="Пароль" name="password" class="default-form-group" />
-    </div>
+    <AppInput
+      label="Email"
+      name="email"
+      type="email"
+      class="default-form-group"
+    />
+    <AppPassword label="Пароль" name="password" class="default-form-group" />
     <div class="form__buttons">
       <AppButton type="submit" :disabled="isSubmitting"> Войти</AppButton>
       <AppButton color="transparent"> Забыли пароль?</AppButton>
@@ -57,8 +56,13 @@ export default {
 </template>
 
 <style scoped>
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .form__buttons {
-  margin-top: 24px;
   display: flex;
   gap: 40px;
   flex-wrap: wrap;

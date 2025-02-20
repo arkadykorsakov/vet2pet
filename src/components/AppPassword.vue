@@ -70,7 +70,7 @@ export default {
         :name="name"
         @focus="setErrors(null)"
         :disabled="disabled"
-        v-model="inputValue"
+        v-model.trim="inputValue"
       />
       <label class="default-label" :for="id">{{ label }}</label>
       <ErrorIcon v-if="errorMessage" class="default-error-icon" />

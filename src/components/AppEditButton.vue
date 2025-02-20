@@ -59,7 +59,9 @@ svg {
   display: none;
 }
 
-.button-edit:hover .button-edit__label {
-  display: block;
+@media (any-hover: hover) {
+  .button-edit:hover .button-edit__label {
+    display: block;
+  }
 }
 </style>

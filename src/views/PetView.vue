@@ -190,7 +190,6 @@ export default {
             label="Вес"
             name="weight"
             type="number"
-            :step="0.001"
             disabled
           />
           <AppSelect

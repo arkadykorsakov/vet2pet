@@ -42,7 +42,10 @@ export default {
         pet_nutrition: yup.string().required(REQUIRED_MSG),
         food_brand: yup.string().required(REQUIRED_MSG),
         chip: yup.string().required(REQUIRED_MSG),
-        date_birth: yup.date().required(REQUIRED_MSG),
+        date_birth: yup
+          .date()
+          .typeError('Невалидная дата')
+          .required(REQUIRED_MSG),
         photos: yup
           .array()
           .typeError('Массив фото')
@@ -233,13 +236,7 @@ export default {
         :items="petOrigins"
         class="cols-2"
       />
-      <AppInput
-        label="Вес"
-        name="weight"
-        type="number"
-        :step="0.001"
-        class="cols-2"
-      />
+      <AppInput label="Вес" name="weight" type="number" class="cols-2" />
       <AppSelect
         item-title="name"
         item-value="value"

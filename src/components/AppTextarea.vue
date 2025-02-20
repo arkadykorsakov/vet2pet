@@ -59,7 +59,7 @@ export default {
         :id="id"
         :name="name"
         @focus="setErrors(null)"
-        v-model="inputValue"
+        v-model.trim="inputValue"
         :disabled="disabled"
       >
       </textarea>

@@ -77,7 +77,7 @@ export default {
   >
     <div class="form__body">
       <AppInput label="Наименование" name="name" class="cols-2" />
-      <AppInput label="Стоимость" name="price" type="number" :step="0.01" />
+      <AppInput label="Стоимость" name="price" type="number" />
       <AppSelect
         item-title="name"
         item-value="id"

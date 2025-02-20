@@ -53,8 +53,7 @@
 }
 
 .default-input:focus + .default-label,
-.default-input.filled + .default-label,
-input.default-input:-webkit-autofill + .default-label {
+.default-input.filled + .default-label {
   background: var(--on-primary);
   top: -8px;
   font-size: 12px;

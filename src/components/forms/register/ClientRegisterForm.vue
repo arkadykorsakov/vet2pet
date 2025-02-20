@@ -74,6 +74,7 @@ export default {
       :validation-schema="currentSchema"
       keep-values
       v-slot="{ isSubmitting }"
+      class="register-form"
     >
       <template v-if="currentStep === 0">
         <AppInput label="Фамилия" name="surname" class="default-form-group" />
@@ -134,8 +135,12 @@ export default {
 </template>
 
 <style scoped>
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .form__buttons {
-  margin-top: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

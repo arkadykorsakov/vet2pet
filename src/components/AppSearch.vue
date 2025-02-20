@@ -59,7 +59,7 @@ export default {
       :name="name"
       @focus="setErrors"
       ref="searchEl"
-      v-model="inputValue"
+      v-model.trim="inputValue"
     />
     <label class="visually-hidden" :for="id">Поиск</label>
   </div>

@@ -25,18 +25,6 @@ export default {
       default: 'text',
       validator: (value) => ['text', 'email', 'number'].includes(value)
     },
-    max: {
-      type: Number,
-      default: undefined
-    },
-    min: {
-      type: Number,
-      default: undefined
-    },
-    step: {
-      type: Number,
-      default: undefined
-    },
     modelValue: {
       type: String,
       default: undefined
@@ -56,11 +44,42 @@ export default {
 
     const id = useId()
 
+    function handleChange(event) {
+      if (props.type === 'number' && event.target.value) {
+        if (props.type === 'number' && event.target.value !== undefined) {
+          event.target.value = event.target.value.replace(',', '.')
+
+          event.target.value = event.target.value.replace(
+            /(?<!^)-|[^0-9.-]|(?!^)-|(?<=\.\d*)\.|^\.-|^-\.$/g,
+            ''
+          )
+
+          event.target.value = event.target.value.replace(/^(-?)0+(?=\d)/, '$1')
+
+          if (event.target.value.startsWith('.'))
+            event.target.value = '0' + event.target.value
+
+          if (event.target.value === '' || event.target.value === '-.')
+            event.target.value = ''
+        }
+      }
+      inputValue.value = event.target.value
+    }
+
+    function handleBlur(event) {
+      if (props.type === 'number' && event.target.value) {
+        if (event.target.value === '-') event.target.value = ''
+        inputValue.value = Number(event.target.value)
+      }
+    }
+
     return {
       inputValue,
       errorMessage,
       setErrors,
-      id
+      id,
+      handleChange,
+      handleBlur
     }
   }
 }
@@ -71,16 +90,18 @@ export default {
     <div class="default-field">
       <input
         class="default-input"
-        :class="{ error: !!errorMessage, filled: !!inputValue }"
-        :type="type"
+        :class="{
+          error: !!errorMessage,
+          filled: !!inputValue.toString()
+        }"
+        :type="type === 'number' ? 'text' : type"
         :id="id"
         :name="name"
         @focus="setErrors(null)"
-        :min="min"
-        :max="max"
         :disabled="disabled"
-        :step="step"
-        v-model="inputValue"
+        :value="inputValue"
+        @input="handleChange"
+        @blur="handleBlur"
       />
       <label class="default-label" :for="id">{{ label }}</label>
       <ErrorIcon v-if="errorMessage" class="default-error-icon" />

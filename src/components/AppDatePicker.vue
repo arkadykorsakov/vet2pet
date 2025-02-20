@@ -117,6 +117,7 @@ export default {
   padding: 12px 16px;
   color: transparent;
   cursor: text;
+  min-width: fit-content;
 }
 
 .form__input:disabled {
