@@ -92,7 +92,7 @@ export default {
         class="default-input"
         :class="{
           error: !!errorMessage,
-          filled: !!inputValue.toString()
+          filled: !!inputValue?.toString()
         }"
         :type="type === 'number' ? 'text' : type"
         :id="id"

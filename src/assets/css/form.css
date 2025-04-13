@@ -60,6 +60,7 @@
   transform: translateY(0);
   -webkit-line-clamp: 1;
   max-width: calc(100% - 24px);
+  pointer-events: none;
 }
 
 .default-input.error {
